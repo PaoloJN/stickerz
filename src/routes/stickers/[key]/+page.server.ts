@@ -5,6 +5,7 @@ import { artUrlsIn, cutsFor } from "$lib/stickers/cuts";
 import { designsWithLogo, logoUsage, type GalleryStack } from "$lib/server/stacks";
 import { STACKS } from "$lib/stacks/mock";
 import { oftenStacked, versionsFor } from "$lib/sticker-page";
+import { siteConfig } from "@/config/site";
 
 const categoryOf = (l: { categories: string[] }) => l.categories[0] ?? "Other";
 
@@ -53,5 +54,9 @@ export const load: PageServerLoad = async ({ params }) => {
     /** shared designs considered for "often stacked with" (real ones only; 0 for mocks) */
     designTotal: designsAreMock ? 0 : pool.length,
     cuts: cutsFor([...arts, ...artUrlsIn(designs.map((d) => d.layout))]),
+    seo: {
+      title: `${logo.title} laptop sticker · ${siteConfig.name}`,
+      description: `${logo.title} laptop sticker: put the ${logo.title} logo on your laptop at true size, then print it yourself or send it to a print shop. Free.`,
+    },
   };
 };

@@ -20,6 +20,8 @@ export type GalleryStack = {
   remix: string;
   count: number;
   layout: MockStack["layout"];
+  /** ISO timestamp of the last edit (real rows only; cache-busts the design's social card) */
+  updatedAt?: string;
 };
 
 export type GallerySort = "trending" | "newest" | "most-remixed";
@@ -52,6 +54,7 @@ function rowToStack(r: StackRow): GalleryStack {
     remix: formatRemix(r.remixCount),
     count: r.stickerCount || r.layout.stickers.length,
     layout: r.layout,
+    updatedAt: r.updatedAt.toISOString(),
   };
 }
 

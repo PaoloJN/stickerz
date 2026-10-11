@@ -6,7 +6,10 @@ declare global {
     interface Locals {
       ownerId: string;
     }
-    // interface PageData {}
+    interface PageData {
+      /** social tags for the page, rendered once by the root layout */
+      seo?: import("$lib/seo").Seo;
+    }
     // interface PageState {}
     // interface Platform {}
   }

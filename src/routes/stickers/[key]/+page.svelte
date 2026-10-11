@@ -44,9 +44,7 @@
 
   const name = $derived(data.logo.title);
   const url = $derived(`${siteConfig.url}/stickers/${data.logo.key}`);
-  const description = $derived(
-    `${name} laptop sticker: put the ${name} logo on your laptop at true size, then print it yourself or send it to a print shop. Free.`,
-  );
+  const description = $derived(data.seo.description);
 
   let versionIdx = $state(0);
   let styleIdx = $state(0);
@@ -150,9 +148,6 @@
   <title>{name} laptop sticker · {siteConfig.name}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={url} />
-  <meta property="og:title" content="{name} laptop sticker · Stickerz" />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content={url} />
 </svelte:head>
 
 <SiteChrome stars={data.stars} />
