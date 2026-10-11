@@ -32,3 +32,6 @@ vite.config.ts.timestamp-*
 .superpowers/
 .env*
 !.env.example
+
+# marketing drafts stay local
+docs/marketing/
