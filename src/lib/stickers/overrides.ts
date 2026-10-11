@@ -14,8 +14,14 @@ import reviewed from "./overrides.review.json";
 /** Defaults when the logo is added to a design. Only defaults: anything the user changes still wins. */
 export type PlaceDefaults = Partial<StickerStyle> & Partial<Pick<Sticker, "theme" | "variant" | "w" | "colors">>;
 
+/** How the cut line is made: traced around the logo, or a plain shape hugging it (for logos full of holes and thin bits) */
+export const CUT_SHAPES = ["trace", "circle", "square"] as const;
+export type CutShape = (typeof CUT_SHAPES)[number];
+
 /** Settings for the precomputed cut line (scripts/build-cuts.ts). */
 export type BuildSettings = {
+  /** "trace" (default) follows the logo's silhouette; "circle" / "square" put the whole logo on one solid shape */
+  shape?: CutShape;
   /** vinyl past the logo, mm at the canonical 100 mm size (default 3) */
   margin?: number;
   /** 0 tight – 100 soft, like the editor's Smoothness (default: the editor default) */
@@ -46,6 +52,10 @@ export type StickerOverride = {
 export const HAND_OVERRIDES: Record<string, StickerOverride> = {
   // paste "Copy as override" lines here, e.g.
   // nvidia: { note: "wordmark reads better as one soft piece", place: { contour: "smooth", smooth: 70 } },
+  nextjs_icon: {
+    note: "the library icon draws the N with white→transparent gradients under an alpha mask, with React-style ':r8:' ids; the editor's inliner and resvg both lose the N, so the icon is a flat black disc with a solid white N",
+    art: { icon: "/stickers/fixed/nextjs_icon_dark.svg" },
+  },
 };
 
 /**

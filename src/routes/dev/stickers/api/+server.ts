@@ -14,7 +14,8 @@ function cleanSettings(s: BuildSettings | null): BuildSettings | null {
   if (!s) return null;
   const n = (v: unknown, lo: number, hi: number) => (typeof v === "number" && Number.isFinite(v) ? Math.min(hi, Math.max(lo, v)) : undefined);
   const b = (v: unknown) => (typeof v === "boolean" ? v : undefined);
-  const out: BuildSettings = { margin: n(s.margin, 0, 12), smooth: n(s.smooth, 0, 100), fillHoles: b(s.fillHoles), merge: b(s.merge), stripMasks: b(s.stripMasks) };
+  const shape = s.shape === "circle" || s.shape === "square" ? s.shape : undefined;
+  const out: BuildSettings = { shape, margin: n(s.margin, 0, 12), smooth: n(s.smooth, 0, 100), fillHoles: b(s.fillHoles), merge: b(s.merge), stripMasks: b(s.stripMasks) };
   return JSON.parse(JSON.stringify(out));
 }
 

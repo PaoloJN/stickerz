@@ -121,7 +121,7 @@
   // ---- fix panel ----
   let panel = $state<ReviewItem | null>(null);
   let scope = $state<"file" | "logo">("file");
-  let draft = $state<Required<BuildSettings>>({ margin: 3, smooth: 50, fillHoles: true, merge: true, stripMasks: false });
+  let draft = $state<Required<BuildSettings>>({ shape: "trace", margin: 3, smooth: 50, fillHoles: true, merge: true, stripMasks: false });
   let saving = $state(false);
   let previewUrl = $state("");
   let previewTimer: ReturnType<typeof setTimeout> | undefined;
@@ -138,6 +138,7 @@
     clearTimeout(previewTimer);
     previewTimer = setTimeout(() => {
       const qs = new URLSearchParams({
+        shape: d.shape,
         margin: String(d.margin),
         smooth: String(d.smooth),
         fillHoles: d.fillHoles ? "1" : "0",
@@ -324,15 +325,23 @@
         </div>
       </div>
       <div class="grid gap-4 border-t border-border px-5 py-4 md:grid-cols-2">
+        <div class="flex flex-col gap-1 text-[13px] md:col-span-2">
+          <span class="flex justify-between"><span>Cut</span><span class="text-muted-foreground">{draft.shape === "trace" ? "follows the logo" : "the logo sits on one solid shape"}</span></span>
+          <div class="flex gap-1.5" role="radiogroup" aria-label="Cut shape">
+            {#each [["trace", "Trace"], ["circle", "Circle"], ["square", "Square"]] as const as [v, label] (v)}
+              <button type="button" role="radio" aria-checked={draft.shape === v} onclick={() => (draft.shape = v)} class="h-8 rounded-lg border px-3 {draft.shape === v ? 'border-foreground bg-foreground text-background' : 'border-border bg-card hover:bg-muted'}">{label}</button>
+            {/each}
+          </div>
+        </div>
         <label class="flex flex-col gap-1 text-[13px]">
           <span class="flex justify-between"><span>Margin</span><span class="font-mono text-muted-foreground">{draft.margin} mm @ 100 mm</span></span>
           <input type="range" min="0" max="10" step="0.5" bind:value={draft.margin} />
         </label>
-        <label class="flex flex-col gap-1 text-[13px]">
+        <label class="flex flex-col gap-1 text-[13px]" class:opacity-40={draft.shape !== "trace"}>
           <span class="flex justify-between"><span>Smoothness</span><span class="font-mono text-muted-foreground">{draft.smooth}</span></span>
           <input type="range" min="0" max="100" step="1" bind:value={draft.smooth} />
         </label>
-        <div class="flex flex-wrap gap-4 text-[13px]">
+        <div class="flex flex-wrap gap-4 text-[13px]" class:opacity-40={draft.shape !== "trace"}>
           <label class="flex items-center gap-2"><input type="checkbox" bind:checked={draft.fillHoles} /> Fill holes</label>
           <label class="flex items-center gap-2"><input type="checkbox" bind:checked={draft.merge} /> One piece</label>
           <label class="flex items-center gap-2" title="Ignore masks and clip paths that hide the logo when tracing"><input type="checkbox" bind:checked={draft.stripMasks} /> Strip masks</label>

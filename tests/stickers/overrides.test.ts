@@ -76,6 +76,6 @@ describe("reviewed cut fixes", () => {
     expect(buildFor("none", "x.svg", merged)).toEqual({});
   });
   it("fill in build defaults", () => {
-    expect(resolveBuild({ smooth: 80 })).toEqual({ margin: 3, smooth: 80, fillHoles: true, merge: true, stripMasks: false });
+    expect(resolveBuild({ smooth: 80 })).toEqual({ shape: "trace", margin: 3, smooth: 80, fillHoles: true, merge: true, stripMasks: false });
   });
 });
