@@ -1,0 +1,1 @@
+ALTER TABLE "brand_requests" ADD COLUMN "ip" text;

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<x-dc>
+<helmet><style>
+body{margin:0;background:#fafaf9;font-family:"Geist",ui-sans-serif,system-ui,sans-serif;color:#111214;-webkit-font-smoothing:antialiased}
+a{color:#111214}a:hover{color:#5f6166}
+</style></helmet>
+<div data-screen-label="Docs" style="min-width:1120px;min-height:100vh;display:flex;flex-direction:column;background:#fafaf9;color:#111214;font-size:14px">
+  <!-- shared chrome: announcement bar + stats bar + nav (nav is sticky top:0 with backdrop blur, Docs tab active) — see Home -->
+
+  <div style="width:1120px;margin:0 auto;box-sizing:border-box;border-left:1px solid #e6e6e3;border-right:1px solid #e6e6e3;flex:1;display:grid;grid-template-columns:232px minmax(0,1fr) 200px">
+    <div style="border-right:1px solid #e6e6e3">
+      <div style="position:sticky;top:65px;padding:32px 16px;display:flex;flex-direction:column;gap:22px">
+        <sc-for list="{{ groups }}" as="g" hint-placeholder-count="4">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.08em;color:#8a8b8f;padding:0 10px 6px">{{ g.label }}</span>
+            <sc-for list="{{ g.items }}" as="i" hint-placeholder-count="2"><span onClick="{{ i.pick }}" style="{{ i.style }}" style-hover="color:#111214">{{ i.label }}</span></sc-for>
+          </div>
+        </sc-for>
+        <div style="display:flex;flex-direction:column;gap:2px">
+          <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.08em;color:#8a8b8f;padding:0 10px 6px">MORE</span>
+          <a href="Stack Stickers For Brands.dc.html" style="height:32px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;border-radius:7px;font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214;background:#f0f0ee">For brands<span style="font-size:12px">↗</span></a>
+          <a href="https://github.com" style="height:32px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;border-radius:7px;font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214;background:#f0f0ee">GitHub<span style="font-size:12px">↗</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding:48px 56px 72px;min-width:0">
+      <div style="max-width:660px;display:flex;flex-direction:column">
+        <!-- article header: eyebrow mono 11.5px .08em #5f6166 "DOCS / PRINTING"; title 42px 600 -.045em lh1.05 #0b1220; lede 17px lh1.6 #5f6166; meta mono 11.5px #8a8b8f -->
+        <!-- h2 (data-toc): 24px 600 -.03em margin 52px 0 12px; body: 15.5px lh1.7 #3d3f44 -->
+        <!-- table card: border #e6e6e3 radius 12 bg #fff; header row bg #f6f6f4 mono 11px .06em #5f6166 padding 12px 16px; rows 14px padding 14px 16px border-bottom #efefec -->
+        <!-- numbered step card: rows grid 28px/1fr gap 14 padding 16px 18px, number mono 12px #8a8b8f, text 15px lh1.6 #3d3f44 with bold lead #111214 -->
+        <!-- callout: radius 12 bg #f3f3f1 padding 20 mono label 11px .08em -->
+
+        <sc-if value="{{ isPrint }}" hint-placeholder-val="{{ true }}">
+          <header>DOCS / PRINTING · <b>How to print your laptop stickers</b> · The editor exports your lid at true size, so what you see is what gets cut. Pick the route that matches what you have: a print shop, a Cricut, or a Silhouette. · 6 MIN READ · UPDATED OCT 2026</header>
+          <h2 id="export">1. Export from the editor</h2>
+          <p>Open your lid, press Export, and choose the file that fits how you’ll print. All three use the same layout and the same sticker sizes.</p>
+          <table><tr><th>FILE</th><th>WHAT IT’S FOR</th><th>USE WITH</th></tr>
+            <tr><td>PDF print sheet</td><td>Kiss-cut sheet with a 2 mm white border and cut lines on their own layer.</td><td>Print shops</td></tr>
+            <tr><td>PNG, 300 DPI</td><td>Flat image on a transparent background. Good for tracing.</td><td>Silhouette, home printers</td></tr>
+            <tr><td>SVG cut file</td><td>Artwork plus a separate cut path around each sticker.</td><td>Cricut</td></tr></table>
+          <h2 id="size">2. Check the size</h2>
+          <p>Printers love to “fit to page”, which quietly shrinks everything. Always print at 100% scale. Every export has a 50 mm ruler in the corner so you can check before you cut.</p>
+          <aside>TEST FIRST — [50 mm ruler graphic: 0 … 50 MM] — Print one sheet on plain paper and measure the ruler. If it isn’t 50 mm, check your print dialog for scaling before you use vinyl.</aside>
+          <table><tr><th>LAPTOP</th><th>LID AREA</th><th>STICKER SIZE</th></tr>
+            <tr><td>MacBook Air 13″</td><td>304 × 215 mm</td><td>45–60 mm</td></tr>
+            <tr><td>MacBook Air 15″</td><td>340 × 238 mm</td><td>50–65 mm</td></tr>
+            <tr><td>MacBook Pro 14″</td><td>313 × 221 mm</td><td>45–60 mm</td></tr>
+            <tr><td>MacBook Pro 16″</td><td>356 × 248 mm</td><td>50–70 mm</td></tr></table>
+          <h2 id="cut">3. Print and cut</h2>
+          <!-- segmented control: bg #ebebe8 border #e0e0dc radius 10 padding 3; items h32 px14 radius7 13.5px 500; active bg #fff #111214 shadow -->
+          <nav>[Print shop] [Cricut] [Silhouette]</nav>
+          <ol data-method="shop">
+            <li><b>Upload the PDF print sheet.</b> It’s already set up for kiss cutting, so most shops can print it as is.</li>
+            <li><b>Pick vinyl, matte or gloss.</b> Ask for a laminate if the laptop travels a lot. It stops scuffs.</li>
+            <li><b>Ask for “kiss cut”, not “die cut”.</b> Kiss cut keeps every sticker on one backing sheet, in your layout.</li>
+            <li><b>Order one sheet first.</b> Check colors and edges before printing for the whole team.</li></ol>
+          <ol data-method="cricut">
+            <li><b>Upload the SVG cut file</b> in Design Space. Use the SVG, not the PNG, so the cut path comes with it.</li>
+            <li><b>Set Operation to Print Then Cut,</b> then Flatten each sticker with its outline.</li>
+            <li><b>Print on printable vinyl.</b> Keep the layout inside Cricut’s Print Then Cut area, about 6.75 × 9.25 in. Big lids may need two sheets.</li>
+            <li><b>Choose Printable Vinyl as the material</b> and cut. Peel slowly from a corner.</li></ol>
+          <ol data-method="sil">
+            <li><b>Open the PNG in Silhouette Studio.</b> The free edition can’t open SVGs; the PNG works everywhere.</li>
+            <li><b>Trace the outer edge</b> with a small offset to get the white border around each logo.</li>
+            <li><b>Turn on registration marks</b> and print on sticker paper or printable vinyl.</li>
+            <li><b>Load the sheet and cut</b> with a kiss-cut setting for your material, so the backing stays whole.</li></ol>
+          <h2 id="apply">4. Stick it on</h2>
+          <p>Wipe the lid with a little isopropyl alcohol and let it dry. Start from the center sticker and work outward, using the placement guide that prints on the last page of the PDF. Press each one from the middle to the edges to push out air.</p>
+        </sc-if>
+
+        <sc-if value="{{ isWorks }}" hint-placeholder-val="{{ false }}">
+          <header>DOCS / GET STARTED · <b>How it works</b> · Three steps, no account. Your lid is drawn at real size, so the layout you make is the one you’ll print.</header>
+          <h2 id="pick">1. Pick your logos</h2>
+          <p>Search the library of developer logos from svgl, or start from someone’s stack in the Gallery. You can also drop in your own SVG.</p>
+          <h2 id="arrange">2. Arrange the lid</h2>
+          <p>Choose your laptop and lid color, then drag, resize and rotate. Shuffle gives you a fresh layout if you’re stuck.</p>
+          <h2 id="share">3. Share or print</h2>
+          <p>Share a link, post it to the Gallery, or export print files. See <a href="#print">How to print</a> for the details.</p>
+          <h2 id="saved">Where your stacks live</h2>
+          <p>Stacks are saved in your browser. Clearing site data deletes them, so share a link to anything you want to keep. Shared links are public to anyone who has them.</p>
+        </sc-if>
+
+        <sc-if value="{{ isContribute }}" hint-placeholder-val="{{ false }}">
+          <header>DOCS / CONTRIBUTE · <b>How to contribute</b> · Stack Stickers is open source. Bug fixes, new laptop sizes and better print exports are all welcome.</header>
+          <h2 id="local">Run it locally</h2>
+          <!-- terminal card: radius 12 bg #111214 color #e5e5e5 padding 16px 18px mono 13px lh1.9; "$ " prompt #6b6b67; Copy button top-right h26 border #2f3136 11px #c8c8c4 -->
+          <pre>$ git clone https://github.com/stack-stickers/app
+$ pnpm install
+$ pnpm dev</pre>
+          <h2 id="pr">Opening a pull request</h2>
+          <p>Keep PRs small and say what you tested. For anything bigger than a fix, open an issue first so we can agree on the approach before you spend the time.</p>
+          <h2 id="logos">Logos aren’t here</h2>
+          <p>We don’t keep logos in this repo. They come from svgl. See <a href="#missing">Adding a missing logo</a>.</p>
+        </sc-if>
+
+        <sc-if value="{{ isMissing }}" hint-placeholder-val="{{ false }}">
+          <header>DOCS / CONTRIBUTE · <b>Adding a missing logo</b> · Every logo comes from svgl. Add it there and it shows up here after the next sync, usually within a week.</header>
+          <h2 id="req">What svgl needs</h2>
+          <ol><li>An SVG from the brand’s official press kit or site.</li><li>Light and dark versions, if the logo has them.</li><li>A category and a link to the product.</li></ol>
+          <h2 id="now">Need it today?</h2>
+          <p>Upload your own SVG in the editor. It stays on your lid only and isn’t added to the public library.</p>
+          <nav>[Submit to svgl ↗ — black button h40] [Upload in editor — outline button]</nav>
+        </sc-if>
+
+        <sc-if value="{{ isFaq }}" hint-placeholder-val="{{ false }}">
+          <header>DOCS / HELP · <b>FAQ</b></header>
+          <!-- accordion: rows border-bottom #e6e6e3; question 16px 500 padding 18px 2px with "+" (rotates 45° when open); answer 15px lh1.7 #5f6166 max-width 580 padding-bottom 20 -->
+          <dl>
+            <dt>Is it free?</dt><dd>Yes. No account, no watermark, no paid tier. It’s open source and kept running by sponsors.</dd>
+            <dt>Do you sell stickers?</dt><dd>No. You design the lid and print it yourself or through a print shop. We never sell branded merchandise.</dd>
+            <dt>Can I sell stickers I make here?</dt><dd>Not with other companies’ logos. They’re trademarks. Personal use is the idea; selling needs permission from each brand.</dd>
+            <dt>Which laptops are supported?</dt><dd>MacBook Air 13″ and 15″, and MacBook Pro 14″ and 16″. Other laptops are on the roadmap; vote for yours on GitHub.</dd>
+            <dt>Where are my stacks saved?</dt><dd>In your browser. Share a link to keep a copy that survives clearing your history.</dd>
+            <dt>My company’s logo is here. Can you remove it?</dt><dd>Yes, usually within 48 hours. Use the <a href="Stack Stickers For Brands.dc.html">brand request form</a>. No lawyer needed.</dd>
+          </dl>
+        </sc-if>
+
+        <!-- prev/next: margin-top 64, 2-col grid gap 12; card padding 16px 18px border #e6e6e3 radius 12 bg #fff; label mono 11px #8a8b8f "← PREVIOUS" / "NEXT →" (right-aligned); title 15px 500 -->
+        <div style="margin-top:64px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px">
+          <span>← PREVIOUS {{ prevLabel }}</span><span>NEXT → {{ nextLabel }}</span>
+        </div>
+        <div style="margin-top:24px;display:flex;align-items:center;gap:12px;font-size:13px;color:#5f6166">
+          <span>Was this page helpful?</span>
+          <span style="height:28px;padding:0 10px;border-radius:7px;border:1px solid #e0e0dc;background:#fff;cursor:pointer">Yes</span><span style="height:28px;padding:0 10px;border-radius:7px;border:1px solid #e0e0dc;background:#fff;cursor:pointer">No</span>
+          <span style="color:#111214">Thanks, noted.</span>
+          <div style="flex:1"></div>
+          <span style="cursor:pointer" style-hover="color:#111214">Edit this page on GitHub ↗</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-left:1px solid #e6e6e3">
+      <div style="position:sticky;top:65px;padding:48px 20px;display:flex;flex-direction:column;gap:4px">
+        <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.08em;color:#8a8b8f;padding-bottom:8px">ON THIS PAGE</span>
+        <!-- toc item: 13px lh1.4 padding 5px 0 5px 12px; left rule via inset box-shadow 1.5px: active #111214 (text #111214 500) else #e6e6e3 (text #8a8b8f) -->
+        <sc-for list="{{ toc }}" as="t" hint-placeholder-count="4"><span onClick="{{ t.go }}" style="{{ t.style }}" style-hover="color:#111214">{{ t.label }}</span></sc-for>
+      </div>
+    </div>
+  </div>
+
+  <!-- shared footer — see Home -->
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  SEQ = ['works', 'print', 'contribute', 'missing', 'faq'];
+  LABEL = {works: 'How it works', print: 'How to print', contribute: 'How to contribute', missing: 'Adding a missing logo', faq: 'FAQ'};
+  GROUPS = [['GET STARTED', ['works']], ['PRINTING', ['print']], ['CONTRIBUTE', ['contribute', 'missing']], ['HELP', ['faq']]];
+  TOC = {
+    print: [['export', 'Export from the editor'], ['size', 'Check the size'], ['cut', 'Print and cut'], ['apply', 'Stick it on']],
+    works: [['pick', 'Pick your logos'], ['arrange', 'Arrange the lid'], ['share', 'Share or print'], ['saved', 'Where your stacks live']],
+    contribute: [['local', 'Run it locally'], ['pr', 'Opening a pull request'], ['logos', 'Logos aren’t here']],
+    missing: [['req', 'What svgl needs'], ['now', 'Need it today?']],
+    faq: []
+  };
+  // scroll-spy: the last heading whose top < 160px is active; jump() scrolls to top - 90 smoothly
+  // sidebar item: h32 px10 radius7 13.5px; active #111214 500 bg #f0f0ee else #5f6166
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<x-dc>
+<helmet><style>
+body{margin:0;background:#fafaf9;font-family:"Geist",ui-sans-serif,system-ui,sans-serif;color:#111214;-webkit-font-smoothing:antialiased}
+a{color:#111214}a:hover{color:#5f6166}
+input::placeholder,textarea::placeholder{color:#8a8b8f}
+@keyframes fb-spin{to{transform:rotate(360deg)}}
+</style></helmet>
+<div data-screen-label="For brands" style="min-width:1120px;min-height:100vh;display:flex;flex-direction:column;background:#fafaf9;color:#111214;font-size:14px">
+  <!-- shared chrome: stats bar (v3.0 · Star on GitHub) + nav — see "Stack Stickers Home.dc.html". This page has no black announcement bar. -->
+
+  <div style="width:1120px;margin:0 auto;box-sizing:border-box;border-left:1px solid #e6e6e3;border-right:1px solid #e6e6e3;flex:1">
+    <div style="padding:80px 32px 40px;display:flex;flex-direction:column;gap:16px">
+      <span style="font-family:'GeistMono',monospace;font-size:11.5px;letter-spacing:.08em;color:#5f6166">FOR BRANDS</span>
+      <span style="font-size:60px;font-weight:600;letter-spacing:-.05em;line-height:1;color:#0b1220">Your logo, your call</span>
+      <span style="font-size:17px;line-height:1.55;color:#5f6166;max-width:580px;text-wrap:pretty">People put your logo on their lids because they like what you make. If you’d rather they didn’t, or you want it to look right, tell us here. No lawyers needed.</span>
+    </div>
+
+    <div style="padding:0 32px 40px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+      <sc-for list="{{ modes }}" as="m" hint-placeholder-count="3">
+        <div onClick="{{ m.pick }}" style="{{ m.style }}">
+          <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:16px;font-weight:600;letter-spacing:-.015em">{{ m.title }}</span><span style="{{ m.radio }}"></span></div>
+          <span style="font-size:13.5px;line-height:1.5;color:#5f6166;text-wrap:pretty;flex:1">{{ m.body }}</span>
+          <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.06em;color:#111214">{{ m.sla }}</span>
+        </div>
+      </sc-for>
+    </div>
+
+    <sc-if value="{{ isFeature }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid #e6e6e3;padding:36px 32px 40px;display:flex;flex-direction:column;gap:18px">
+        <span style="font-size:22px;font-weight:600;letter-spacing:-.03em">Pick a plan</span>
+        <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+          <sc-for list="{{ plans }}" as="p" hint-placeholder-count="3">
+            <div onClick="{{ p.pick }}" style="{{ p.style }}">
+              <div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:16px;font-weight:600;letter-spacing:-.015em">{{ p.name }}</span><span style="{{ p.radio }}"></span></div>
+              <span style="display:flex;align-items:baseline;gap:6px"><span style="font-size:34px;font-weight:600;letter-spacing:-.04em;line-height:1">{{ p.price }}</span><span style="font-size:13px;color:#5f6166">/ month</span></span>
+              <div style="display:flex;flex-direction:column;gap:9px;font-size:13.5px;line-height:1.45;color:#3d3f44">
+                <sc-for list="{{ p.perks }}" as="k" hint-placeholder-count="3"><span style="display:flex;gap:9px"><span style="color:#111214">✓</span>{{ k }}</span></sc-for>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px 28px;font-size:13px;line-height:1.45;color:#5f6166">
+          <span style="display:flex;gap:9px"><span style="color:#111214">✓</span>Always labeled “Sponsored”</span>
+          <span style="display:flex;gap:9px"><span style="color:#111214">✓</span>Never pushed up in search results</span>
+          <span style="display:flex;gap:9px"><span style="color:#111214">✓</span>“Official” needs a short written logo license</span>
+        </div>
+      </div>
+    </sc-if>
+
+    <div style="border-top:1px solid #e6e6e3;display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)">
+      <div style="padding:40px 32px;border-right:1px solid #e6e6e3">
+        <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <span style="font-size:22px;font-weight:600;letter-spacing:-.03em">{{ formTitle }}</span>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px">
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500">Company</span><input value="{{ company }}" onChange="{{ setCompany }}" placeholder="Acme Inc." style="{{ in.company }}"><sc-if value="{{ er.hasCompany }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;color:#c23b31">{{ er.company }}</span></sc-if></div>
+              <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:13px;font-weight:500">Your name</span><input value="{{ name }}" onChange="{{ setName }}" placeholder="Alex Rivera" style="{{ in.name }}"><sc-if value="{{ er.hasName }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;color:#c23b31">{{ er.name }}</span></sc-if></div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:13px;font-weight:500">Work email</span>
+              <input value="{{ email }}" onChange="{{ setEmail }}" placeholder="alex@acme.com" style="{{ in.email }}">
+              <sc-if value="{{ er.hasEmail }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;color:#c23b31">{{ er.email }}</span></sc-if>
+              <sc-if value="{{ emailHint }}" hint-placeholder-val="{{ true }}"><span style="font-size:12.5px;color:#8a8b8f">We’ll send a link to this address to confirm you work at the brand.</span></sc-if>
+            </div>
+            <sc-if value="{{ needsLogos }}" hint-placeholder-val="{{ true }}">
+              <div style="display:flex;flex-direction:column;gap:6px;position:relative">
+                <span style="font-size:13px;font-weight:500">Which logos?</span>
+                <div style="{{ in.logos }}">
+                  <sc-for list="{{ chosen }}" as="c" hint-placeholder-count="0"><span onClick="{{ c.remove }}" style="height:26px;padding:0 7px 0 5px;display:flex;align-items:center;gap:6px;border-radius:6px;background:#f3f3f1;border:1px solid #e6e6e3;font-size:12.5px;cursor:pointer" style-hover="border-color:#c9c9c5"><img src="{{ c.src }}" style="width:14px;height:14px;object-fit:contain" alt="">{{ c.name }}<span style="color:#8a8b8f;font-size:10.5px">✕</span></span></sc-for>
+                  <input value="{{ logoQ }}" onChange="{{ setLogoQ }}" placeholder="{{ logoPh }}" style="flex:1;min-width:120px;border:0;outline:0;background:transparent;font:inherit;font-size:14px;color:#111214;height:26px">
+                </div>
+                <sc-if value="{{ hasSugg }}" hint-placeholder-val="{{ false }}">
+                  <div style="position:absolute;left:0;right:0;top:100%;margin-top:4px;z-index:5;background:#fff;border:1px solid #e6e6e3;border-radius:10px;box-shadow:0 12px 30px rgba(20,30,40,.12);padding:4px;display:flex;flex-direction:column">
+                    <sc-for list="{{ sugg }}" as="s" hint-placeholder-count="0"><span onClick="{{ s.add }}" style="height:34px;padding:0 10px;display:flex;align-items:center;gap:10px;border-radius:7px;font-size:13.5px;cursor:pointer" style-hover="background:#f3f3f1"><img src="{{ s.src }}" style="width:16px;height:16px;object-fit:contain" alt="">{{ s.name }}<span style="flex:1"></span><span style="font-family:'GeistMono',monospace;font-size:10.5px;color:#8a8b8f">{{ s.lids }}</span></span></sc-for>
+                  </div>
+                </sc-if>
+                <sc-if value="{{ er.hasLogos }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;color:#c23b31">{{ er.logos }}</span></sc-if>
+              </div>
+            </sc-if>
+            <sc-if value="{{ isFeature }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <span style="font-size:13px;font-weight:500">Plan</span>
+                <div style="display:flex;flex-wrap:wrap;gap:6px"><sc-for list="{{ interests }}" as="g" hint-placeholder-count="3"><span onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</span></sc-for></div>
+              </div>
+            </sc-if>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <span style="font-size:13px;font-weight:500">{{ detailsLabel }}<span style="color:#8a8b8f;font-weight:400"> · optional</span></span>
+              <textarea value="{{ details }}" onChange="{{ setDetails }}" placeholder="{{ detailsPh }}" rows="4" style="box-sizing:border-box;width:100%;resize:vertical;border:1px solid #e0e0dc;border-radius:10px;background:#fff;padding:10px 12px;font:inherit;font-size:14px;line-height:1.5;color:#111214;outline:0"></textarea>
+            </div>
+            <sc-if value="{{ needsAuth }}" hint-placeholder-val="{{ true }}">
+              <div onClick="{{ toggleAuth }}" style="display:flex;align-items:flex-start;gap:10px;cursor:pointer;user-select:none">
+                <span style="{{ authBox }}">{{ authMark }}</span>
+                <span style="font-size:13.5px;line-height:1.5;color:#3d3f44">I’m allowed to make this request for the brand.</span>
+              </div>
+              <sc-if value="{{ er.hasAuth }}" hint-placeholder-val="{{ false }}"><span style="font-size:12.5px;color:#c23b31;margin-top:-10px">{{ er.auth }}</span></sc-if>
+            </sc-if>
+            <div style="display:flex;align-items:center;gap:14px;padding-top:4px">
+              <span onClick="{{ submit }}" style="{{ submitStyle }}"><sc-if value="{{ sending }}" hint-placeholder-val="{{ false }}"><span style="{{ spinner }}"></span></sc-if>{{ submitLabel }}</span>
+              <span style="font-size:12.5px;color:#8a8b8f">{{ submitNote }}</span>
+            </div>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <span style="width:40px;height:40px;border-radius:12px;background:#111214;color:#fff;display:grid;place-items:center;font-size:18px">✓</span>
+            <span style="font-size:28px;font-weight:600;letter-spacing:-.035em">Request received</span>
+            <span style="font-size:15px;line-height:1.6;color:#5f6166;max-width:460px;text-wrap:pretty">We sent a confirmation link to <span style="color:#111214;font-weight:500">{{ email }}</span>. Click it so we know the request is really from {{ companyName }}.</span>
+            <div style="border:1px solid #e6e6e3;border-radius:12px;background:#fff;overflow:hidden">
+              <div style="display:flex;justify-content:space-between;padding:12px 16px;background:#f6f6f4;border-bottom:1px solid #e6e6e3;font-family:'GeistMono',monospace;font-size:11px;letter-spacing:.06em;color:#5f6166"><span>REFERENCE</span><span style="color:#111214">{{ ref }}</span></div>
+              <sc-for list="{{ sentRows }}" as="r" hint-placeholder-count="3"><div style="display:flex;justify-content:space-between;gap:16px;padding:12px 16px;border-bottom:1px solid #efefec;font-size:13.5px"><span style="color:#5f6166">{{ r.k }}</span><span style="font-weight:500;text-align:right">{{ r.v }}</span></div></sc-for>
+            </div>
+            <div style="display:flex;gap:8px">
+              <span onClick="{{ reset }}" style="height:38px;padding:0 14px;box-sizing:border-box;display:flex;align-items:center;border-radius:9px;background:#fff;border:1px solid rgba(17,18,20,.12);font-weight:500;font-size:13.5px;cursor:pointer" style-hover="background:#f3f3f1">Send another request</span>
+            </div>
+          </div>
+        </sc-if>
+      </div>
+
+      <div style="padding:40px 32px;display:flex;flex-direction:column;gap:28px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-size:15px;font-weight:600">{{ stepsTitle }}</span>
+          <sc-for list="{{ steps }}" as="s" hint-placeholder-count="3">
+            <div style="display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px">
+              <span style="{{ s.dot }}">{{ s.n }}</span>
+              <div style="display:flex;flex-direction:column;gap:3px;padding-top:3px"><span style="font-size:14px;font-weight:500">{{ s.t }}</span><span style="font-size:13px;line-height:1.5;color:#5f6166;text-wrap:pretty">{{ s.d }}</span></div>
+            </div>
+          </sc-for>
+        </div>
+        <div style="border-radius:12px;background:#f3f3f1;padding:16px 18px;display:flex;flex-direction:column;gap:12px">
+          <span style="font-family:'GeistMono',monospace;font-size:11px;letter-spacing:.08em;color:#111214">GOOD TO KNOW</span>
+          <span style="font-size:13.5px;line-height:1.55;color:#3d3f44;text-wrap:pretty"><span style="font-weight:500;color:#111214">Logos come from svgl.</span> Removing a logo here hides it on Stack Stickers only. To remove it from svgl as well, open an issue on their GitHub.</span>
+          <span style="font-size:13.5px;line-height:1.55;color:#3d3f44;text-wrap:pretty"><span style="font-weight:500;color:#111214">Lids already shared</span> will show a blank sticker where your logo was.</span>
+          <span style="font-size:13.5px;line-height:1.55;color:#3d3f44;text-wrap:pretty"><span style="font-weight:500;color:#111214">Sponsored placements</span> are always labeled, and never hide or push down anyone else’s logo.</span>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #e6e6e3;padding:28px 32px;display:grid;grid-template-columns:160px minmax(0,1fr);gap:24px;background:#f3f3f1">
+      <span style="font-family:'GeistMono',monospace;font-size:11px;letter-spacing:.08em;color:#111214;padding-top:2px">TRADEMARK NOTICE</span>
+      <span style="font-size:13.5px;line-height:1.6;color:#5f6166;max-width:720px;text-wrap:pretty">All logos are trademarks of their owners. Stack Stickers isn’t affiliated with, endorsed by or sponsored by any of them unless a placement says “Sponsored”. We don’t sell stickers or merchandise with these logos. Lids are designed and printed by people for their own use.</span>
+    </div>
+
+    <!-- shared footer — see Home -->
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mode&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;remove&quot;,&quot;update&quot;,&quot;feature&quot;],&quot;default&quot;:&quot;remove&quot;},&quot;showSent&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false}}">
+class Component extends DCLogic {
+  LOGOS = [['vercel','Vercel','vercel.svg',3010],['next','Next.js','nextjs_icon_dark.svg',3120],['react','React','react_light.svg',3480],['tailwind','Tailwind CSS','tailwindcss.svg',2760],['ts','TypeScript','typescript.svg',2980],['figma','Figma','figma.svg',2240],['linear','Linear','linear.svg',1360],['github','GitHub','github_light.svg',2890],['vite','Vite','vite.svg',1650],['cursor','Cursor','cursor_light.svg',2210],['raycast','Raycast','raycast.svg',1120],['bun','Bun','bun.svg',1410],['deno','Deno','deno.svg',690],['supabase','Supabase','supabase.svg',1690],['neon','Neon','neon.svg',610],['docker','Docker','docker.svg',1240],['stripe','Stripe','stripe.svg',1180],['resend','Resend','resend-icon-black.svg',540],['openai','OpenAI','openai.svg',1840],['claude','Claude','claude-ai-icon.svg',1720],['prisma','Prisma','prisma.svg',840],['astro','Astro','astro-icon-light.svg',870],['svelte','Svelte','svelte.svg',1290]]
+    .map(([id, name, f, lids]) => ({id, name, src: 'static/library/' + f, lids}));
+  FREE = ['gmail.com','yahoo.com','outlook.com','hotmail.com','icloud.com','proton.me','protonmail.com','aol.com'];
+  MODES = {
+    remove: {title: 'Remove a logo', body: 'Take your logo out of the library, the editor and every logo page.', sla: 'HIDDEN WITHIN 48 HOURS', form: 'Request a removal', submit: 'Send removal request', details: 'Anything we should know', ph: 'For example, only remove the old wordmark.',
+      steps: [['Send the form', 'Takes a minute. No legal letter needed.'], ['Confirm your email', 'A link goes to your work address so we know it’s you.'], ['We hide it', 'Within 48 hours of confirming. We email you when it’s done.']]},
+    update: {title: 'Update a logo', body: 'Swap in a new version, fix colors, or add light and dark variants.', sla: 'LIVE IN THE NEXT SYNC', form: 'Request an update', submit: 'Send update request', details: 'What should change', ph: 'Link to your press kit or the new SVG.',
+      steps: [['Send the form', 'Point us to the new artwork, ideally your press kit.'], ['We update svgl', 'We open the pull request upstream so everyone gets the fix.'], ['It syncs here', 'Usually within a week. Existing lids update automatically.']]},
+    feature: {title: 'Feature your brand', body: 'Get the Official badge, a Sponsored spot in the logo picker, or a full partnership.', sla: 'FROM $49 / MONTH', form: 'Tell us about your brand', submit: 'Get in touch', details: 'What you have in mind', ph: 'Launch dates, which logos, anything else.',
+      steps: [['Pick a plan', 'Verified, Featured or Partner. Not sure? Tell us what you need.'], ['We confirm the details', 'Artwork, placement and start date. Official needs a short written logo license.'], ['Goes live', 'You approve everything before it ships.']]}
+  };
+  PLANS = {
+    verified: {name: 'Verified', price: '$49', perks: ['Official badge on your logo', 'Only the versions and colors you approve']},
+    featured: {name: 'Featured', price: '$299', perks: ['Everything in Verified', 'A spot in the Sponsored row of the logo picker', 'Monthly stats: lids, exports and shares']},
+    partner: {name: 'Partner', price: '$1,500', perks: ['Everything in Featured', 'A fixed Sponsored spot that’s always shown', 'Your logo on the homepage and README', 'A starter layout built around your stack']}
+  };
+  blank() { return {company: '', name: '', email: '', logoQ: '', chosen: [], details: '', auth: false, tried: false, status: 'idle'}; }
+  state = {mode: 'remove', plan: 'featured', ...this.blank()};
+  fromHash() {
+    const h = (location.hash || '').slice(1);
+    if (this.PLANS[h]) this.setState({mode: 'feature', plan: h, tried: false});
+    else if (this.MODES[h]) this.setState({mode: h, tried: false});
+  }
+  errors() {
+    const st = this.state, e = {}, needsLogos = st.mode !== 'feature';
+    if (!st.company.trim()) e.company = 'Add the company or brand name.';
+    if (!st.name.trim()) e.name = 'Add your name.';
+    const em = st.email.trim().toLowerCase(), dom = em.split('@')[1] || '';
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) e.email = 'Enter a valid email address.';
+    else if (this.FREE.includes(dom) && needsLogos) e.email = 'Use an email at your company’s domain so we can confirm you work there.';
+    if (needsLogos && !st.chosen.length) e.logos = 'Pick at least one logo.';
+    if (needsLogos && !st.auth) e.auth = 'Please confirm you can act for the brand.';
+    return e;
+  }
+  renderVals() {
+    const st = this.state, M = this.MODES[st.mode], e = st.tried ? this.errors() : {}, needsLogos = st.mode !== 'feature', sending = st.status === 'sending';
+    const field = k => ({height: 42, boxSizing: 'border-box', width: '100%', border: '1px solid ' + (e[k] ? '#e2554a' : '#e0e0dc'), borderRadius: 10, background: '#fff', padding: '0 12px', font: 'inherit', fontSize: 14, color: '#111214', outline: 0, boxShadow: e[k] ? '0 0 0 3px rgba(226,85,74,.12)' : 'none'});
+    const q = st.logoQ.trim().toLowerCase();
+    const sugg = q ? this.LOGOS.filter(l => !st.chosen.includes(l.id) && l.name.toLowerCase().includes(q)).slice(0, 5) : [];
+    const ref = 'BR-' + (1000 + (st.company.length * 97 + st.email.length * 13) % 9000);
+    return {
+      modes: Object.entries(this.MODES).map(([k, m]) => { const on = st.mode === k; return {title: m.title, body: m.body, sla: m.sla,
+        style: {padding: 18, borderRadius: 14, background: '#fff', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 10, minHeight: 150, boxSizing: 'border-box', border: '1px solid ' + (on ? '#111214' : '#e6e6e3'), boxShadow: on ? '0 0 0 1px #111214, 0 10px 24px rgba(20,30,40,.08)' : '0 1px 2px rgba(0,0,0,.04)'},
+        radio: {width: 16, height: 16, boxSizing: 'border-box', borderRadius: '50%', border: on ? '5px solid #111214' : '1.5px solid #c9c9c5'}}; }),
+      formTitle: M.form,
+      logoPh: st.chosen.length ? 'Add another' : 'Search, like Vercel',
+      sugg: sugg.map(l => ({...l, lids: 'ON ' + (l.lids / 1000).toFixed(1) + 'K LIDS'})),
+      plans: Object.entries(this.PLANS).map(([k, p]) => { const on = st.plan === k; return {...p,
+        style: {padding: 22, borderRadius: 14, background: '#fff', cursor: 'pointer', display: 'flex', flexDirection: 'column', gap: 16, boxSizing: 'border-box', border: '1px solid ' + (on ? '#111214' : '#e6e6e3'), boxShadow: on ? '0 0 0 1px #111214, 0 10px 24px rgba(20,30,40,.08)' : '0 1px 2px rgba(0,0,0,.04)'},
+        radio: {width: 16, height: 16, boxSizing: 'border-box', borderRadius: '50%', border: on ? '5px solid #111214' : '1.5px solid #c9c9c5'}}; }),
+      interests: [...Object.keys(this.PLANS), null].map(k => { const a = st.plan === k, l = k ? this.PLANS[k].name : 'Not sure yet'; return {label: l,
+        style: {height: 32, padding: '0 12px', boxSizing: 'border-box', display: 'flex', alignItems: 'center', borderRadius: 999, cursor: 'pointer', fontSize: 13, fontWeight: 500, color: a ? '#fff' : '#3d3f44', background: a ? '#111214' : '#fff', border: '1px solid ' + (a ? '#111214' : '#e0e0dc')}}; }),
+      detailsLabel: M.details, detailsPh: M.ph,
+      authBox: {width: 18, height: 18, flex: 'none', boxSizing: 'border-box', marginTop: 1, borderRadius: 5, display: 'grid', placeItems: 'center', fontSize: 11, fontWeight: 700, color: '#fff', background: st.auth ? '#111214' : '#fff', border: '1.5px solid ' + (st.auth ? '#111214' : e.auth ? '#e2554a' : '#c9c9c5')},
+      submitLabel: sending ? 'Sending…' : st.mode === 'feature' && st.plan ? 'Request ' + this.PLANS[st.plan].name : M.submit,
+      submitNote: st.mode === 'remove' ? 'Hidden within 48 hours of confirming.' : st.mode === 'update' ? 'Usually live within a week.' : 'We reply within 3 business days.',
+      submitStyle: {height: 44, padding: '0 18px', display: 'flex', alignItems: 'center', gap: 8, borderRadius: 10, background: sending ? '#3d3f44' : '#111214', color: '#fff', fontWeight: 500, fontSize: 14.5, flex: 'none'},
+      companyName: st.company || 'your company', ref,
+      sentRows: [['Request', M.title], needsLogos ? ['Logos', st.chosen.join(', ')] : ['Plan', st.plan ? `${this.PLANS[st.plan].name} · ${this.PLANS[st.plan].price} / month` : 'Not sure yet'], ['Next', st.mode === 'remove' ? 'Hidden within 48 hours of confirming' : st.mode === 'update' ? 'Live in the next svgl sync' : 'Reply within 3 business days']].map(([k, v]) => ({k, v})),
+      stepsTitle: st.mode === 'feature' ? 'How sponsorship works' : st.mode === 'update' ? 'How updates work' : 'How removal works',
+      steps: M.steps.map(([t, d], i) => { const done = st.status === 'sent' && i === 0; return {n: done ? '✓' : String(i + 1), t, d,
+        dot: {width: 26, height: 26, boxSizing: 'border-box', borderRadius: '50%', display: 'grid', placeItems: 'center', fontFamily: "'GeistMono',monospace", fontSize: 11.5, background: done ? '#111214' : '#fff', color: done ? '#fff' : '#111214', border: '1px solid ' + (done ? '#111214' : '#e0e0dc')}}; })
+    };
+  }
+}
+</script>
+</body>
+</html>

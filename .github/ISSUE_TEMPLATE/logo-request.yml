@@ -1,0 +1,82 @@
+name: 🏷️ Request a logo
+description: Ask for a logo that's missing from the sticker library.
+title: "[logo]: "
+labels: [logo-request]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks! Logos get added in batches, usually within a week. Need it today? Upload your own SVG in the editor; it stays on your design only.
+
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: The product or brand, as it should appear in the library.
+      placeholder: Acme
+    validations:
+      required: true
+
+  - type: input
+    id: svg
+    attributes:
+      label: SVG
+      description: A link to the official SVG (press kit or brand page). Paste the SVG inline if there's no link.
+      placeholder: https://acme.com/press/logo.svg
+    validations:
+      required: true
+
+  - type: input
+    id: svg-dark
+    attributes:
+      label: Dark version (optional)
+      description: A separate file for dark backgrounds, if the brand has one.
+      placeholder: https://acme.com/press/logo-dark.svg
+
+  - type: input
+    id: site
+    attributes:
+      label: Website
+      placeholder: https://acme.com
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      multiple: true
+      options:
+        - AI
+        - Authentication
+        - Browser
+        - CMS
+        - Compiler
+        - Config
+        - Crypto
+        - Cybersecurity
+        - Database
+        - Design
+        - Devtool
+        - Education
+        - Framework
+        - Hardware
+        - Hosting
+        - Language
+        - Library
+        - Monorepo
+        - Payment
+        - Secrets
+        - Social
+        - Software
+        - Other
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Checklist
+      options:
+        - label: The SVG comes from the brand's official press kit or site.
+          required: true
+        - label: It's a vector (no embedded bitmaps) and under 20 kB.
+          required: true

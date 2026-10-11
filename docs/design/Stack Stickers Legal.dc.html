@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<x-dc>
+<helmet><style>
+body{margin:0;background:#fafaf9;font-family:"Geist",ui-sans-serif,system-ui,sans-serif;color:#111214;-webkit-font-smoothing:antialiased}
+a{color:#111214}a:hover{color:#5f6166}
+</style></helmet>
+<div data-screen-label="Legal" style="min-width:1120px;min-height:100vh;display:flex;flex-direction:column;background:#fafaf9;color:#111214;font-size:14px">
+  <!-- shared chrome: announcement bar + nav (no stats bar on this mock) — see Home -->
+
+  <div style="width:1120px;margin:0 auto;box-sizing:border-box;border-left:1px solid #e6e6e3;border-right:1px solid #e6e6e3;flex:1;display:grid;grid-template-columns:232px minmax(0,1fr)">
+    <div style="border-right:1px solid #e6e6e3">
+      <div style="position:sticky;top:0;padding:40px 16px;display:flex;flex-direction:column;gap:2px">
+        <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.08em;color:#8a8b8f;padding:0 10px 8px">LEGAL</span>
+        <sc-for list="{{ docs }}" as="d" hint-placeholder-count="4"><span onClick="{{ d.pick }}" style="{{ d.style }}" style-hover="color:#111214">{{ d.label }}</span></sc-for>
+        <div style="height:1px;background:#e6e6e3;margin:16px 10px"></div>
+        <a href="Stack Stickers For Brands.dc.html" style="height:32px;padding:0 10px;display:flex;align-items:center;justify-content:space-between;border-radius:7px;font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214;background:#f0f0ee">Brand removal request<span style="font-size:12px">→</span></a>
+        <span style="padding:12px 10px 0;font-size:12.5px;line-height:1.5;color:#8a8b8f">Questions? <span style="color:#111214">legal@stackstickers.dev</span></span>
+      </div>
+    </div>
+
+    <div style="padding:56px 64px 80px;min-width:0">
+      <div style="max-width:660px;display:flex;flex-direction:column">
+        <span style="font-family:'GeistMono',monospace;font-size:11.5px;letter-spacing:.08em;color:#5f6166">LEGAL · UPDATED {{ updated }}</span>
+        <span style="font-size:44px;font-weight:600;letter-spacing:-.045em;line-height:1.05;color:#0b1220;margin-top:14px">{{ title }}</span>
+        <div style="margin-top:28px;padding:18px 20px;border-radius:12px;background:#f3f3f1;display:flex;flex-direction:column;gap:10px">
+          <span style="font-family:'GeistMono',monospace;font-size:11px;letter-spacing:.08em;color:#111214">IN SHORT</span>
+          <sc-for list="{{ short }}" as="s" hint-placeholder-count="3"><span style="display:flex;gap:10px;font-size:14.5px;line-height:1.55;color:#3d3f44"><span style="color:#111214;flex:none">✓</span>{{ s }}</span></sc-for>
+        </div>
+
+        <!-- section heading style: font-size:20px;font-weight:600;letter-spacing:-.02em;margin:36px 0 10px (first one margin-top 44px)
+             body style: font-size:15px;line-height:1.75;color:#3d3f44;text-wrap:pretty -->
+
+        <sc-if value="{{ isTerms }}" hint-placeholder-val="{{ true }}">
+          <h3>1. Using Stack Stickers</h3>
+          <p>Stack Stickers is a free tool for designing laptop sticker layouts. You don’t need an account. By using the site you agree to these terms. If you don’t agree, please don’t use it.</p>
+          <h3>2. Your lids</h3>
+          <p>Layouts you make are yours. When you share one, it gets a public link and can appear in the Gallery if you post it there. You let us show, link to and make preview images of shared lids. You can delete a shared lid at any time from the link you were given.</p>
+          <h3>3. Logos and trademarks</h3>
+          <p>The logos come from svgl and belong to their owners. They’re here so you can make stickers for your own laptop. Don’t use Stack Stickers to make stickers or merchandise to sell unless you have permission from each brand. See the <a href="#tm">Trademark notice</a>.</p>
+          <h3>4. What not to do</h3>
+          <p>Don’t upload artwork you don’t have the right to use, share lids meant to harass or mislead, or try to break or overload the site. We may remove shared lids that do.</p>
+          <h3>5. Sponsorships</h3>
+          <p>Brands can sponsor placements. Sponsored placements are always labeled and never change search results or what you can put on your lid.</p>
+          <h3>6. No warranty</h3>
+          <p>The site is provided as is. We work hard to get sizes right, but always print a test sheet before ordering. We aren’t responsible for print costs or results.</p>
+          <h3>7. Changes</h3>
+          <p>If these terms change in a way that matters, we’ll say so on this page and in the changelog.</p>
+        </sc-if>
+
+        <sc-if value="{{ isPrivacy }}" hint-placeholder-val="{{ false }}">
+          <h3>What we store</h3>
+          <!-- table: border:1px solid #e6e6e3;border-radius:12px;background:#fff; header row bg #f6f6f4 mono 11px .06em #5f6166; rows 13px 16px padding, border-bottom #efefec; columns 170px / 1fr / 120px -->
+          <table>
+            <tr><th>WHAT</th><th>WHY</th><th>WHERE</th></tr>
+            <tr><td>Your stacks</td><td>So your lids are there when you come back.</td><td>Your browser</td></tr>
+            <tr><td>Shared lids</td><td>The layout, name and handle you choose, so the link works.</td><td>Our server</td></tr>
+            <tr><td>Page views</td><td>Counted without cookies, so we know which pages help.</td><td>Our analytics</td></tr>
+          </table>
+          <h3>What we don’t do</h3>
+          <p>No accounts, no ad trackers, no selling data. We don’t know who you are unless you email us.</p>
+          <h3>Other sites</h3>
+          <p>GitHub Sponsors and Ko-fi handle payments; we never see your card. Print shops you reach through our links may set their own cookies after you click. Their privacy policies apply there.</p>
+          <h3>Deleting things</h3>
+          <p>Clear site data to remove stacks from your browser. Delete a shared lid from its link, or email us and we’ll remove it within a week.</p>
+        </sc-if>
+
+        <sc-if value="{{ isAffiliate }}" hint-placeholder-val="{{ false }}">
+          <h3>Which links pay us</h3>
+          <p>Some links to print shops and cutting machines are affiliate links. If you buy after clicking one, the shop pays us a commission. You pay the same price.</p>
+          <!-- two-column list card: name (500) left, note (#5f6166) right, rows 13px 16px, border-bottom #efefec -->
+          <table>
+            <tr><td>Sticker Mule</td><td>Print orders</td></tr>
+            <tr><td>Cricut</td><td>Machines and materials</td></tr>
+            <tr><td>Silhouette</td><td>Machines, US only</td></tr>
+            <tr><td>Sticker paper and laminate</td><td>Supplies</td></tr>
+          </table>
+          <h3>How you’ll know</h3>
+          <p>Every one of these links sits next to this label: <span style="display:inline-flex;align-items:center;gap:8px;padding:6px 10px;border-radius:8px;background:#f3f3f1;font-size:12px;color:#5f6166"><span style="font-family:'GeistMono',monospace;font-size:10px;letter-spacing:.06em;color:#111214">PAID LINKS</span>We earn a commission if you buy.</span></p>
+          <h3>What it doesn’t change</h3>
+          <p>We only list shops that accept our print files and that we’d use ourselves. The printing guide works the same with any shop or machine.</p>
+        </sc-if>
+
+        <sc-if value="{{ isTm }}" hint-placeholder-val="{{ false }}">
+          <h3>Whose logos these are</h3>
+          <p>All logos are trademarks of their owners. They come from svgl, an open collection of SVG logos, and are shown so people can design stickers for their own laptops.</p>
+          <h3>No endorsement</h3>
+          <p>Stack Stickers isn’t affiliated with, endorsed by or sponsored by any brand shown, unless a placement is labeled “Sponsored”. Pages like “Vercel laptop sticker” describe what you can make here. They aren’t official merchandise, and nothing is for sale.</p>
+          <h3>Official and Sponsored labels</h3>
+          <p>An “Official” badge appears only when a brand has given us a written logo license. “Sponsored” appears on every paid placement, without exception.</p>
+          <h3>Removal</h3>
+          <p>If you own a mark and want it removed, use the <a href="Stack Stickers For Brands.dc.html">brand request form</a>. We hide it within 48 hours of confirming the request. Removal is free and has nothing to do with sponsorship.</p>
+          <h3>Device names</h3>
+          <p>MacBook, MacBook Air and MacBook Pro are trademarks of Apple Inc., used only to describe lid sizes.</p>
+        </sc-if>
+
+        <div style="margin-top:56px;padding-top:20px;border-top:1px solid #e6e6e3;display:flex;align-items:center;gap:12px;font-size:13px;color:#5f6166">
+          <span>Something unclear? <span style="color:#111214">legal@stackstickers.dev</span></span>
+          <div style="flex:1"></div>
+          <span style="cursor:pointer" style-hover="color:#111214">View history on GitHub ↗</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- shared footer — see Home -->
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  DOCS = {
+    terms: {label: 'Terms of use', title: 'Terms of use', updated: 'OCT 2026', short: ['Free to use, no account needed.', 'Your lids are yours. Shared ones are public.', 'Logos are for your own laptop, not for selling stickers.']},
+    privacy: {label: 'Privacy', title: 'Privacy', updated: 'OCT 2026', short: ['No accounts and no ad trackers.', 'Your stacks stay in your browser until you share one.', 'Page views are counted without cookies.']},
+    affiliate: {label: 'Affiliate disclosure', title: 'Affiliate disclosure', updated: 'OCT 2026', short: ['Some print links pay us a small commission.', 'You pay the same price either way.', 'Every paid link is labeled right where it appears.']},
+    tm: {label: 'Trademark notice', title: 'Trademark notice', updated: 'OCT 2026', short: ['Logos belong to their owners, via svgl.', 'Nothing here is endorsed unless it says “Sponsored”.', 'Brands can ask for removal for free, any time.']}
+  };
+  // sidebar item: height 32, padding 0 10px, radius 7, 13.5px; active = #111214 500 bg #f0f0ee, else #5f6166
+  // hash → doc: #terms #privacy #affiliate #tm (#trademark alias)
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<x-dc>
+<helmet><style>
+body{margin:0;background:#fafaf9;font-family:"Geist",ui-sans-serif,system-ui,sans-serif;color:#111214;-webkit-font-smoothing:antialiased}
+a{color:#111214}a:hover{color:#5f6166}
+</style></helmet>
+<div data-screen-label="Support" style="min-width:1120px;min-height:100vh;display:flex;flex-direction:column;background:#fafaf9;color:#111214;font-size:14px">
+  <!-- shared chrome: announcement bar (link → #brands) + stats bar + nav (Support tab active) — see Home -->
+
+  <div style="width:1120px;margin:0 auto;box-sizing:border-box;border-left:1px solid #e6e6e3;border-right:1px solid #e6e6e3;flex:1">
+    <div style="padding:80px 32px 48px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;align-items:end">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:'GeistMono',monospace;font-size:11.5px;letter-spacing:.08em;color:#5f6166;display:flex;gap:8px"><span style="color:#e2554a">♥</span>SUPPORT</span>
+        <span style="font-size:60px;font-weight:600;letter-spacing:-.05em;line-height:1;color:#0b1220">Keep the lids free</span>
+        <span style="font-size:17px;line-height:1.55;color:#5f6166;max-width:560px;text-wrap:pretty">Stack Stickers is free, open source and has no ads. It’s built by one person on top of svgl. If it saved you an afternoon, here’s how to say thanks.</span>
+      </div>
+      <a href="#brands" style="padding:20px;border-radius:16px;background:#fff;border:1px solid #e6e6e3;color:#111214;text-decoration:none;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 12px 32px rgba(20,30,40,.06)" style-hover="color:#111214;border-color:#c9c9c5">
+        <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.08em;color:#5f6166">HERE FOR YOUR BRAND?</span>
+        <span style="font-size:17px;font-weight:600;letter-spacing:-.02em;line-height:1.3">Make your logo official on every lid it’s on.</span>
+        <span style="display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:#5f6166;padding-top:4px">From $49 a month<span style="color:#111214;font-weight:500">See plans ↓</span></span>
+      </a>
+    </div>
+
+    <div style="border-top:1px solid #e6e6e3;padding:40px 32px;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px">
+      <div style="padding:24px;border-radius:16px;background:#fff;border:1px solid #111214;box-shadow:0 0 0 1px #111214,0 16px 40px rgba(20,30,40,.08);display:flex;flex-direction:column;gap:18px">
+        <div style="display:flex;align-items:center;gap:12px">
+          <span style="width:40px;height:40px;border-radius:11px;background:#f3f3f1;display:grid;place-items:center;flex:none"><img src="static/library/github_light.svg" style="width:20px;height:20px" alt=""></span>
+          <div style="flex:1;display:flex;flex-direction:column;gap:2px"><span style="font-size:18px;font-weight:600;letter-spacing:-.02em">GitHub Sponsors</span><span style="font-size:13px;color:#5f6166">@PaoloJN · monthly or one-time</span></div>
+          <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.06em;color:#111214;background:#f3f3f1;border-radius:6px;padding:4px 8px">BEST WAY</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+          <!-- segmented: bg #ebebe8 border #e0e0dc radius 9 padding 2; items h30 px12 radius 7 13px 500; active bg #fff shadow -->
+          <div style="display:flex;gap:2px;background:#ebebe8;border:1px solid #e0e0dc;border-radius:9px;padding:2px"><sc-for list="{{ freqs }}" as="g" hint-placeholder-count="2"><span onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</span></sc-for></div>
+          <!-- amount chips: h34 min-w 52 px12 radius 9 14px 500; active bg #111214 #fff, else bg #fff border #e0e0dc -->
+          <div style="display:flex;gap:6px"><sc-for list="{{ amounts }}" as="a" hint-placeholder-count="4"><span onClick="{{ a.pick }}" style="{{ a.style }}">{{ a.label }}</span></sc-for></div>
+        </div>
+        <span onClick="{{ ghGo }}" style="height:48px;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:12px;background:#111214;color:#fff;font-weight:500;font-size:15px;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)" style-hover="background:#2a2c30"><span style="color:#ff8a80">♥</span>{{ ghLabel }}</span>
+        <span style="font-size:12.5px;color:#8a8b8f;line-height:1.5">GitHub takes no fee from personal sponsors, so all of it reaches the project. Cancel any time.</span>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <div style="flex:1;padding:22px;border-radius:16px;background:#fff;border:1px solid #e6e6e3;display:flex;flex-direction:column;gap:10px">
+          <span style="font-size:16px;font-weight:600;letter-spacing:-.015em">No GitHub account?</span>
+          <span style="font-size:13.5px;line-height:1.5;color:#5f6166;flex:1;text-wrap:pretty">Leave a one-time tip on Ko-fi with a card or PayPal.</span>
+          <span onClick="{{ kofiGo }}" style="height:40px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;gap:6px;border-radius:10px;background:#fff;border:1px solid rgba(17,18,20,.14);font-weight:500;font-size:14px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05)" style-hover="background:#f3f3f1">Tip on Ko-fi<span style="font-size:12px">↗</span></span>
+        </div>
+        <div style="padding:16px 22px;border-radius:16px;background:#f3f3f1;display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:14px;font-weight:500">Need an invoice?</span>
+          <span style="font-size:13px;line-height:1.5;color:#5f6166;text-wrap:pretty">Open Collective for companies is coming. Until then, <a href="Stack Stickers For Brands.dc.html" style="color:#111214;text-underline-offset:3px">get in touch</a>.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- "Thank you · N PEOPLE · From GitHub Sponsors and Ko-fi" + 30px avatar circles + dashed "+" "Your spot". OMITTED in the implementation until there is real sponsor data. -->
+
+    <div id="brands" style="border-top:1px solid #e6e6e3;background:#f3f3f1;color:#111214;padding:56px 32px;display:flex;flex-direction:column;gap:32px;scroll-margin-top:16px">
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:40px;align-items:center">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'GeistMono',monospace;font-size:11.5px;letter-spacing:.08em;color:#5f6166">FOR BRANDS</span>
+          <span style="font-size:44px;font-weight:600;letter-spacing:-.045em;line-height:1.05;color:#0b1220">Your logo is already on lids. Make it official.</span>
+          <span style="font-size:16px;line-height:1.6;color:#5f6166;max-width:520px;text-wrap:pretty">Developers add your logo for free. Sponsoring lets you choose how it looks and puts it in front of people while they pick their stack.</span>
+        </div>
+        <div style="border-radius:14px;background:#fafaf9;border:1px solid #e6e6e3;color:#111214;padding:14px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 2px rgba(0,0,0,.04),0 16px 40px rgba(20,30,40,.08)">
+          <div style="height:34px;box-sizing:border-box;border:1px solid #e0e0dc;border-radius:8px;background:#fff;display:flex;align-items:center;padding:0 10px;font-size:12.5px;color:#8a8b8f">Search logos</div>
+          <span style="font-family:'GeistMono',monospace;font-size:10px;letter-spacing:.08em;color:#5f6166">SPONSORED</span>
+          <div style="display:flex;gap:6px">
+            <div style="flex:1;height:64px;box-sizing:border-box;border-radius:10px;border:1.5px dashed #111214;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px"><span style="font-size:12px;font-weight:600">Your logo</span><span style="font-family:'GeistMono',monospace;font-size:9.5px;color:#111214;background:#f0f0ee;border-radius:4px;padding:1px 5px">✓ OFFICIAL</span></div>
+            <div style="flex:1;height:64px;box-sizing:border-box;border-radius:10px;border:1px dashed #c9c9c5"></div>
+            <div style="flex:1;height:64px;box-sizing:border-box;border-radius:10px;border:1px dashed #c9c9c5"></div>
+          </div>
+          <span style="font-family:'GeistMono',monospace;font-size:10px;letter-spacing:.08em;color:#5f6166">ALL LOGOS</span>
+          <div style="display:flex;gap:6px">
+            <span style="flex:1;height:40px;border-radius:9px;background:#fff;border:1px solid #e6e6e3;display:grid;place-items:center"><img src="static/library/react_light.svg" style="width:18px;height:18px" alt=""></span>
+            <span style="flex:1;height:40px;border-radius:9px;background:#fff;border:1px solid #e6e6e3;display:grid;place-items:center"><img src="static/library/typescript.svg" style="width:18px;height:18px" alt=""></span>
+            <span style="flex:1;height:40px;border-radius:9px;background:#fff;border:1px solid #e6e6e3;display:grid;place-items:center"><img src="static/library/figma.svg" style="width:18px;height:18px" alt=""></span>
+            <span style="flex:1;height:40px;border-radius:9px;background:#fff;border:1px solid #e6e6e3;display:grid;place-items:center"><img src="static/library/docker.svg" style="width:18px;height:18px" alt=""></span>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+        <!-- plan card: padding 24 radius 16 bg #fff border #e6e6e3; featured card border #111214 + 0 0 0 1px ring + shadow; name 16px 600; price 34px 600 -.04em + "/ month" 13px #5f6166; perks 13.5px lh1.45 #3d3f44 with ✓; CTA h40 -->
+        <div>Verified · $49 / month · ✓ Official badge on your logo · ✓ Only the versions and colors you approve · [Get verified → For Brands#verified, outline]</div>
+        <div>Featured (highlighted) · $299 / month · ✓ Everything in Verified · ✓ A spot in the Sponsored row of the logo picker · ✓ Monthly stats: lids, exports and shares · [Get featured → For Brands#featured, black]</div>
+        <div>Partner · $1,500 / month · ✓ Everything in Featured · ✓ A fixed Sponsored spot that’s always shown · ✓ Your logo on the homepage and README · ✓ A starter layout built around your stack · [Talk to us → For Brands#partner, outline]</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto;gap:20px;align-items:center;padding-top:20px;border-top:1px solid #e0e0dc;font-size:13px;line-height:1.45;color:#5f6166">
+        <span style="display:flex;gap:9px"><span style="color:#111214">✓</span>Always labeled “Sponsored”</span>
+        <span style="display:flex;gap:9px"><span style="color:#111214">✓</span>Never pushed up in search results</span>
+        <span style="display:flex;gap:9px"><span style="color:#111214">✓</span>“Official” needs a short written logo license</span>
+        <a href="Stack Stickers For Brands.dc.html#remove" style="color:#5f6166;text-decoration:none;font-size:13px;white-space:nowrap" style-hover="color:#111214">Remove or update a logo instead →</a>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #e6e6e3;padding:48px 32px;display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:22px;font-weight:600;letter-spacing:-.03em">Free ways to help</span><span style="font-size:14px;color:#5f6166">None of these cost you anything.</span></div>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px">
+        <!-- card: padding 20 radius 14 bg #fff border #e6e6e3; title 15px 500; body 13.5px lh1.5 #5f6166 flex:1; link 13.5px 500 with arrow padding-top 6 -->
+        <div>Star the repo · Stars help other developers find it. · Star on GitHub ↗</div>
+        <div>Contribute code · New laptop sizes, export fixes, or a good first issue. · How to contribute → (Docs/contribute)</div>
+        <div>Share your lid · Post it to the Gallery. Every share brings someone new. · Open Gallery →</div>
+      </div>
+
+      <div style="padding:22px;border-radius:16px;background:#fff;border:1px solid #e6e6e3;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:28px;align-items:start">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-size:15px;font-weight:500">Print through our links</span>
+          <span style="font-size:13.5px;line-height:1.5;color:#5f6166;text-wrap:pretty">When you’re ready to print, these shops and tools pay us a small cut. You pay the same price.</span>
+          <span style="display:flex;align-items:flex-start;gap:8px;margin-top:6px;padding:8px 10px;border-radius:8px;background:#f3f3f1;font-size:12px;line-height:1.45;color:#5f6166"><span style="font-family:'GeistMono',monospace;font-size:10px;letter-spacing:.06em;color:#111214;flex:none;padding-top:1px">PAID LINKS</span>We earn a commission if you buy. It never changes what we recommend.</span>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <!-- rows: grid 1fr/auto gap 16 padding 12px 0 border-bottom #efefec; name 14px 500 (+ optional mono tag "US ONLY" 10px bordered); note 12.5px #8a8b8f; cta 13px 500 + ↗ -->
+          <div>Sticker Mule · Upload our print PDF as is. Cut lines are already in it. · Order prints ↗</div>
+          <div>Cricut · Print Then Cut with the SVG export. · See machines ↗</div>
+          <div>Silhouette Cameo [US ONLY] · Trace and cut from the PNG export. · See machines ↗</div>
+          <div>Sticker paper and laminate · For home printers. Matte or gloss. · Shop supplies ↗</div>
+          <a href="Stack Stickers Docs.dc.html" style="font-size:13px;color:#5f6166;text-decoration:none;padding-top:12px;display:flex;gap:6px" style-hover="color:#111214">Read the printing guide first<span>→</span></a>
+        </div>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #e6e6e3;padding:40px 32px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:24px;align-items:center;background:#f3f3f1">
+      <span style="width:52px;height:52px;border-radius:14px;background:#fff;border:1px solid #e6e6e3;display:grid;place-items:center"><img src="static/library/svgl.svg" style="width:26px;height:26px" alt=""></span>
+      <div style="display:flex;flex-direction:column;gap:4px"><span style="font-size:17px;font-weight:600;letter-spacing:-.02em">Built on svgl</span><span style="font-size:14px;line-height:1.5;color:#5f6166;max-width:560px;text-wrap:pretty">Every logo here comes from svgl, made by pheralb and its contributors. If you sponsor us, consider sponsoring them too.</span></div>
+      <span onClick="{{ svglGo }}" style="height:40px;padding:0 15px;box-sizing:border-box;display:flex;align-items:center;gap:7px;border-radius:10px;background:#fff;border:1px solid rgba(17,18,20,.14);font-weight:500;font-size:14px;cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.05)" style-hover="background:#fafaf9"><span style="color:#e2554a">♥</span>Sponsor pheralb</span>
+    </div>
+
+    <!-- shared footer — see Home -->
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  AMTS = {Monthly: [3, 5, 10, 25], 'One-time': [5, 10, 25, 50]};
+  state = {freq: 'Monthly', amt: 5};
+  // ghLabel: `Sponsor $${amt}${monthly ? ' a month' : ' once'} on GitHub`
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet><style>
+@font-face{font-family:"Geist";src:url("static/fonts/Geist.woff2") format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"GeistMono";src:url("static/fonts/GeistMono.woff2") format("woff2");font-weight:100 900;font-display:swap}
+body{margin:0;background:#fafaf9;font-family:"Geist",ui-sans-serif,system-ui,sans-serif;color:#111214;-webkit-font-smoothing:antialiased}
+a{color:#111214}a:hover{color:#5f6166}
+input::placeholder{color:#8a8b8f}
+</style></helmet>
+<div data-screen-label="Logos" style="min-width:1120px;min-height:100vh;display:flex;flex-direction:column;background:#fafaf9;overflow:clip;color:#111214;font-size:14px">
+  <div style="background:#111214;color:#fff">
+    <div style="width:1120px;margin:0 auto;box-sizing:border-box;height:34px;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 24px;font-size:12.5px">
+      <span style="font-family:'GeistMono',monospace;font-size:10px;letter-spacing:.08em;font-weight:500;color:#111214;background:#fff;border-radius:4px;padding:2px 6px">FOR BRANDS</span>
+      <span style="color:#c8c8c4">Your logo is already on developers’ lids. Make it official.</span>
+      <a href="Stack Stickers Support v2.dc.html#brands" style="color:#fff;font-weight:500;text-decoration:none;display:flex;gap:5px" style-hover="color:#fff;opacity:.75">Verified logos and Sponsored spots<span>→</span></a>
+    </div>
+  </div>
+  <div style="border-bottom:1px solid #e6e6e3;background:#f3f3f1">
+    <div style="width:1120px;margin:0 auto;box-sizing:border-box;height:38px;display:flex;align-items:center;gap:14px;padding:0 24px;border-left:1px solid #e6e6e3;border-right:1px solid #e6e6e3;font-size:13px;color:#5f6166">
+      <span style="font-family:'GeistMono',monospace;font-size:11px;font-weight:500;color:#111214;background:#fff;border:1px solid #e6e6e3;border-radius:5px;padding:2px 6px">v3.0</span>
+      <span style="display:flex;align-items:center;gap:6px;color:#111214;cursor:pointer" style-hover="opacity:.7">Light mode and print sheets are here<span style="font-size:12px">→</span></span>
+      <div style="flex:1"></div>
+      <span style="display:flex;align-items:center;gap:7px;cursor:pointer" style-hover="color:#111214"><img src="static/library/github_light.svg" style="width:14px;height:14px" alt="">Star on GitHub<span style="font-family:'GeistMono',monospace;font-size:11.5px;color:#111214;background:#fff;border:1px solid #e6e6e3;border-radius:5px;padding:1px 6px">4.8k</span></span>
+    </div>
+  </div>
+  <div style="border-bottom:1px solid #e6e6e3">
+    <div style="width:1120px;margin:0 auto;box-sizing:border-box;height:64px;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;padding:0 24px;border-left:1px solid #e6e6e3;border-right:1px solid #e6e6e3">
+      <a href="Stack Stickers Home.dc.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:#111214"><img src="static/library/svgl.svg" style="width:20px;height:20px" alt=""><span style="font-weight:600;font-size:15px;letter-spacing:-.01em">Stack Stickers</span></a>
+      <div style="display:flex;gap:2px"><a href="Stack Stickers Gallery.dc.html" style="padding:6px 12px;border-radius:7px;font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214;background:#f0f0ee">Gallery</a><span style="padding:6px 12px;border-radius:7px;font-size:13.5px;color:#111214;background:#f0f0ee;font-weight:500">Logos</span><a href="Stack Stickers Docs.dc.html" style="padding:6px 12px;border-radius:7px;font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214;background:#f0f0ee">Docs</a><a href="Stack Stickers Support v2.dc.html" style="padding:6px 12px;border-radius:7px;font-size:13.5px;color:#5f6166;text-decoration:none;display:flex;align-items:center;gap:6px" style-hover="color:#111214;background:#f0f0ee"><span style="color:#e2554a;font-size:12px">♥</span>Support</a></div>
+      <div style="display:flex;justify-content:flex-end;align-items:center;gap:10px"><a href="Stack Stickers Editor.dc.html" style="height:34px;padding:0 13px;display:flex;align-items:center;border-radius:8px;background:#111214;color:#fff;font-weight:500;font-size:13.5px;text-decoration:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.14)" style-hover="background:#2a2c30;color:#fff">Make your lid</a></div>
+    </div>
+  </div>
+
+  <div style="width:1120px;margin:0 auto;box-sizing:border-box;border-left:1px solid #e6e6e3;border-right:1px solid #e6e6e3;flex:1">
+    <div style="padding:72px 32px 40px;display:grid;grid-template-columns:minmax(0,1fr) 420px;gap:40px;align-items:end">
+      <div style="display:flex;flex-direction:column;gap:16px">
+        <span style="font-family:'GeistMono',monospace;font-size:11.5px;letter-spacing:.08em;color:#5f6166">LOGOS · {{ total }}</span>
+        <span style="font-size:60px;font-weight:600;letter-spacing:-.05em;line-height:1;color:#0b1220">Every logo, ready to peel</span>
+        <span style="font-size:17px;line-height:1.55;color:#5f6166;max-width:520px;text-wrap:pretty">Developer logos from svgl, laid out like a sticker sheet. Open one to see it up close, or hit + to put it on your lid.</span>
+      </div>
+      <div style="height:52px;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:0 10px 0 18px;border:1px solid #e0e0dc;border-radius:12px;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(20,30,40,.05)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8a8b8f" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+        <input ref="{{ searchRef }}" value="{{ q }}" onChange="{{ setQ }}" placeholder="Search logos, like Vercel or Postgres" style="flex:1;min-width:0;border:0;outline:0;background:transparent;font:inherit;font-size:16px;color:#111214">
+        <span style="font-family:'GeistMono',monospace;font-size:11.5px;color:#6b6b67;border:1px solid #e4e4e1;border-radius:6px;padding:3px 7px">⌘K</span>
+      </div>
+    </div>
+
+    <div style="position:sticky;top:0;z-index:10;background:rgba(250,250,249,.92);backdrop-filter:blur(8px);border-top:1px solid #e6e6e3;border-bottom:1px solid #e6e6e3;padding:12px 32px;display:flex;align-items:center;gap:14px">
+      <div style="display:flex;gap:6px;flex:1;min-width:0;overflow-x:auto;scrollbar-width:none">
+        <sc-for list="{{ chips }}" as="g" hint-placeholder-count="9"><span onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}<span style="{{ g.numStyle }}">{{ g.n }}</span></span></sc-for>
+      </div>
+      <div style="display:flex;gap:2px;background:#ebebe8;border:1px solid #e0e0dc;border-radius:9px;padding:2px;flex:none">
+        <sc-for list="{{ sorts }}" as="g" hint-placeholder-count="3"><span onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</span></sc-for>
+      </div>
+    </div>
+
+    <div style="padding:32px 32px 120px;display:flex;flex-direction:column;gap:40px">
+      <sc-for list="{{ sections }}" as="s" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <div style="display:flex;align-items:baseline;gap:10px;padding:0 4px">
+            <span style="font-size:17px;font-weight:600;letter-spacing:-.02em">{{ s.title }}</span>
+            <span style="font-family:'GeistMono',monospace;font-size:11.5px;color:#8a8b8f">{{ s.count }}</span>
+            <div style="flex:1"></div>
+            <sc-if value="{{ s.hasLink }}" hint-placeholder-val="{{ true }}"><a href="Stack Stickers Category.dc.html" style="font-size:13px;color:#5f6166;text-decoration:none;display:flex;gap:6px" style-hover="color:#111214">{{ s.link }}<span>→</span></a></sc-if>
+          </div>
+          <div style="border-radius:16px;padding:8px;background-color:#f1f1ee;background-image:radial-gradient(#dcdcd7 1px,transparent 1px);background-size:14px 14px;box-shadow:inset 0 0 0 1px #e6e6e3;display:grid;grid-template-columns:repeat(auto-fill,minmax(146px,1fr));gap:4px">
+            <sc-for list="{{ s.items }}" as="c" hint-placeholder-count="6">
+              <a href="{{ c.href }}" onClick="{{ c.open }}" onMouseEnter="{{ c.enter }}" onMouseLeave="{{ c.leave }}" style="{{ c.cell }}">
+                <div style="position:relative;width:88px;height:88px">
+                  <div style="{{ c.sticker }}"><img src="{{ c.src }}" style="{{ c.img }}" alt=""></div>
+                </div>
+                <span style="font-size:13.5px;font-weight:500;color:#111214;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%">{{ c.name }}</span>
+                <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.03em;color:#8a8b8f">{{ c.meta }}</span>
+                <span onClick="{{ c.quick }}" title="{{ c.tip }}" style="{{ c.quickStyle }}">{{ c.quickLabel }}</span>
+              </a>
+            </sc-for>
+            <sc-if value="{{ s.hasMore }}" hint-placeholder-val="{{ false }}">
+              <span onClick="{{ s.toggle }}" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:22px 10px 16px;border-radius:12px;cursor:pointer;min-width:0;background:rgba(255,255,255,.55);box-shadow:inset 0 0 0 1px #e0e0dc" style-hover="background:#fff;box-shadow:inset 0 0 0 1px #c9c9c5">
+                <div style="height:56px;display:flex;align-items:center;padding-left:10px">
+                  <sc-for list="{{ s.peek }}" as="p" hint-placeholder-count="3"><span style="{{ p.style }}"><img src="{{ p.src }}" style="width:20px;height:20px;object-fit:contain" alt=""></span></sc-for>
+                </div>
+                <span style="font-size:13.5px;font-weight:500;color:#111214">{{ s.moreLabel }}</span>
+                <span style="font-family:'GeistMono',monospace;font-size:10.5px;letter-spacing:.03em;color:#8a8b8f">{{ s.moreMeta }}</span>
+              </span>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+
+      <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:56px 24px;border-radius:16px;border:1px dashed #d6d6d2;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">
+          <span style="font-size:22px;font-weight:600;letter-spacing:-.03em">No logo called “{{ q }}” yet.</span>
+          <span style="font-size:14px;color:#5f6166;max-width:400px;line-height:1.5;text-wrap:pretty">Logos come from svgl. If it’s missing there, you can submit it, or upload your own SVG in the editor.</span>
+          <div style="display:flex;gap:8px;padding-top:8px">
+            <span style="height:38px;padding:0 14px;display:flex;align-items:center;border-radius:9px;background:#111214;color:#fff;font-weight:500;font-size:13.5px;cursor:pointer" style-hover="background:#2a2c30">Submit to svgl</span>
+            <span onClick="{{ clearQ }}" style="height:38px;padding:0 14px;box-sizing:border-box;display:flex;align-items:center;border-radius:9px;background:#fff;border:1px solid rgba(17,18,20,.12);font-weight:500;font-size:13.5px;cursor:pointer" style-hover="background:#f3f3f1">Clear search</span>
+          </div>
+        </div>
+      </sc-if>
+
+      <div style="display:flex;align-items:flex-start;gap:10px;padding:14px 16px;border-radius:12px;background:#f3f3f1;font-size:13px;line-height:1.5;color:#5f6166">
+        <span style="font-family:'GeistMono',monospace;font-size:11px;letter-spacing:.06em;color:#111214;padding-top:1px;flex:none">™</span>
+        <span style="text-wrap:pretty">Logos belong to their owners. Showing them here isn’t an endorsement, and nothing here is for sale. Own one of these marks? <a href="Stack Stickers For Brands.dc.html#remove" style="color:#111214;text-underline-offset:3px">Request removal</a>.</span>
+      </div>
+    </div>
+
+    <div style="border-top:1px solid #e6e6e3;padding:56px 32px 48px;display:grid;grid-template-columns:minmax(0,1.6fr) repeat(3,minmax(0,1fr));gap:32px">
+      <div style="display:flex;flex-direction:column;gap:14px"><a href="Stack Stickers Home.dc.html" style="display:flex;align-items:center;gap:9px;text-decoration:none;color:#111214"><img src="static/library/svgl.svg" style="width:20px;height:20px" alt=""><span style="font-weight:600;font-size:15px">Stack Stickers</span></a><span style="font-size:13.5px;color:#5f6166;line-height:1.5;max-width:240px">Design your laptop lid at true size, then post it or print it.</span></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:13px;font-weight:500">Product</span><a href="Stack Stickers Editor.dc.html" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Editor</a><a href="Stack Stickers Gallery.dc.html" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Gallery</a><a href="Stack Stickers Logos.dc.html" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Logos</a><a href="Stack Stickers Support v2.dc.html" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Support</a></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:13px;font-weight:500">Resources</span><a href="Stack Stickers Docs.dc.html" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Docs</a><a href="Stack Stickers Docs.dc.html" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">How to print</a><span style="font-size:13.5px;color:#5f6166;cursor:pointer" style-hover="color:#111214">Contribute</span><span style="font-size:13.5px;color:#5f6166;cursor:pointer" style-hover="color:#111214">GitHub</span></div>
+      <div style="display:flex;flex-direction:column;gap:12px"><span style="font-size:13px;font-weight:500">Legal</span><a href="Stack Stickers Legal.dc.html#terms" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Terms &amp; privacy</a><a href="Stack Stickers Legal.dc.html#affiliate" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Affiliate disclosure</a><a href="Stack Stickers Legal.dc.html#tm" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Trademark notice</a><a href="Stack Stickers For Brands.dc.html#remove" style="font-size:13.5px;color:#5f6166;text-decoration:none" style-hover="color:#111214">Brand removal request</a></div>
+    </div>
+    <div style="border-top:1px solid #e6e6e3;padding:20px 32px;display:flex;align-items:center;gap:16px;font-size:12.5px;color:#8a8b8f">
+      <span>© 2026 Stack Stickers</span><span style="color:#cfcfcb">·</span><span>Logos from <a href="#" style="color:#5f6166;text-underline-offset:3px">svgl</a>. Every logo belongs to its owner.</span>
+      <div style="flex:1"></div><span style="color:#5f6166;cursor:pointer" style-hover="color:#111214">GitHub</span><span style="color:#5f6166;cursor:pointer" style-hover="color:#111214">X</span>
+    </div>
+  </div>
+
+  <div style="{{ tray }}">
+    <div style="display:flex;align-items:center;padding-left:4px">
+      <sc-for list="{{ trayIcons }}" as="t" hint-placeholder-count="0"><span style="{{ t.style }}"><img src="{{ t.src }}" style="width:18px;height:18px;object-fit:contain" alt=""></span></sc-for>
+    </div>
+    <span style="font-size:13.5px;font-weight:500;color:#fff;white-space:nowrap">{{ trayLabel }}</span>
+    <span onClick="{{ clearAll }}" style="font-size:13px;color:#a3a3a0;cursor:pointer;padding:0 4px" style-hover="color:#fff">Clear</span>
+    <a href="Stack Stickers Editor.dc.html" style="height:36px;padding:0 14px;display:flex;align-items:center;gap:6px;border-radius:9px;background:#fff;color:#111214;font-weight:500;font-size:13.5px;text-decoration:none;white-space:nowrap" style-hover="background:#ebebe8;color:#111214">Open in editor<span style="font-size:12px">→</span></a>
+  </div>
+
+  <sc-if value="{{ dlg }}" hint-placeholder-val="{{ false }}">
+    <div onClick="{{ close }}" style="{{ overlay }}">
+      <div onClick="{{ stop }}" role="dialog" aria-label="{{ d.name }}" style="{{ dialog }}">
+        <div style="position:relative;display:flex;flex-direction:column;background-color:#f1f1ee;background-image:radial-gradient(#dcdcd7 1px,transparent 1px);background-size:14px 14px;border-right:1px solid #e6e6e3">
+          <div style="display:flex;align-items:center;gap:8px;padding:14px 16px">
+            <div style="display:flex;gap:2px;background:#e6e6e2;border-radius:9px;padding:2px">
+              <sc-for list="{{ dViews }}" as="g" hint-placeholder-count="2"><span onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</span></sc-for>
+            </div>
+            <div style="flex:1"></div>
+            <sc-if value="{{ onLid }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;align-items:center;gap:6px">
+                <sc-for list="{{ swatches }}" as="w" hint-placeholder-count="4"><span onClick="{{ w.pick }}" title="{{ w.title }}" style="{{ w.style }}"></span></sc-for>
+              </div>
+            </sc-if>
+          </div>
+          <div style="flex:1;display:grid;place-items:center;padding:8px 36px 36px;min-height:380px">
+            <sc-if value="{{ onSheet }}" hint-placeholder-val="{{ true }}">
+              <div style="{{ dBig.wrap }}"><img src="{{ d.src }}" style="{{ dBig.img }}" alt=""></div>
+            </sc-if>
+            <sc-if value="{{ onLid }}" hint-placeholder-val="{{ false }}">
+              <div style="width:100%;display:flex;flex-direction:column;gap:12px">
+                <div style="{{ dLid.lid }}"><div style="{{ dLid.wrap }}"><img src="{{ d.src }}" style="{{ dLid.img }}" alt=""></div></div>
+                <span style="font-family:'GeistMono',monospace;font-size:11px;letter-spacing:.04em;color:#5f6166;text-align:center">{{ dLid.label }}</span>
+              </div>
+            </sc-if>
+          </div>
+          <span onClick="{{ prev }}" title="Previous (←)" style="position:absolute;left:14px;bottom:14px;width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:#fff;border:1px solid #e0e0dc;cursor:pointer;font-size:14px" style-hover="background:#f6f6f4">←</span>
+          <span onClick="{{ next }}" title="Next (→)" style="position:absolute;left:54px;bottom:14px;width:34px;height:34px;display:grid;place-items:center;border-radius:9px;background:#fff;border:1px solid #e0e0dc;cursor:pointer;font-size:14px" style-hover="background:#f6f6f4">→</span>
+          <span style="position:absolute;right:16px;bottom:24px;font-family:'GeistMono',monospace;font-size:11px;color:#8a8b8f">{{ dPos }}</span>
+        </div>
+
+        <div style="display:flex;flex-direction:column;min-width:0">
+          <div style="display:flex;align-items:flex-start;gap:12px;padding:24px 24px 0">
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+              <span style="font-family:'GeistMono',monospace;font-size:11px;letter-spacing:.08em;color:#5f6166">{{ d.eyebrow }}</span>
+              <span style="font-size:32px;font-weight:600;letter-spacing:-.04em;line-height:1.05">{{ d.name }}</span>
+            </div>
+            <span onClick="{{ close }}" title="Close (Esc)" style="width:32px;height:32px;flex:none;display:grid;place-items:center;border-radius:8px;cursor:pointer;color:#5f6166;font-size:15px" style-hover="background:#f0f0ee;color:#111214">✕</span>
+          </div>
+
+          <div style="padding:22px 24px;display:flex;flex-direction:column;gap:18px">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:13px;font-weight:500">Sticker</span>
+              <div style="display:flex;gap:2px;background:#ebebe8;border:1px solid #e0e0dc;border-radius:9px;padding:2px">
+                <sc-for list="{{ dShapes }}" as="g" hint-placeholder-count="3"><span onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</span></sc-for>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <span style="font-size:13px;font-weight:500">Size</span>
+              <div style="display:flex;gap:2px;background:#ebebe8;border:1px solid #e0e0dc;border-radius:9px;padding:2px">
+                <sc-for list="{{ dSizes }}" as="g" hint-placeholder-count="3"><span onClick="{{ g.pick }}" style="{{ g.style }}">{{ g.label }}</span></sc-for>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px;padding-top:4px">
+              <span onClick="{{ dAdd }}" style="{{ dAddStyle }}">{{ dAddLabel }}</span>
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px">
+                <span onClick="{{ dDownload }}" style="height:40px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#fff;border:1px solid rgba(17,18,20,.12);font-weight:500;font-size:13.5px;cursor:pointer" style-hover="background:#f3f3f1">Download SVG</span>
+                <span onClick="{{ dCopy }}" style="height:40px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border-radius:10px;background:#fff;border:1px solid rgba(17,18,20,.12);font-weight:500;font-size:13.5px;cursor:pointer" style-hover="background:#f3f3f1">{{ dCopyLabel }}</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top:auto;border-top:1px solid #efefec;padding:16px 24px;display:flex;flex-direction:column;gap:10px">
+            <span style="font-size:13px;font-weight:500">Often stacked with</span>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ related }}" as="r" hint-placeholder-count="5"><span onClick="{{ r.open }}" style="height:30px;padding:0 10px 0 7px;display:flex;align-items:center;gap:7px;border-radius:8px;background:#f6f6f4;border:1px solid #ebebe8;font-size:12.5px;cursor:pointer" style-hover="border-color:#c9c9c5;background:#fff"><img src="{{ r.src }}" style="width:15px;height:15px;object-fit:contain" alt="">{{ r.name }}</span></sc-for>
+            </div>
+          </div>
+          <div style="border-top:1px solid #efefec;padding:14px 24px;display:flex;align-items:center;gap:12px;background:#fafaf9;font-size:13px">
+            <span style="font-family:'GeistMono',monospace;font-size:11px;color:#8a8b8f">{{ d.meta }}</span>
+            <div style="flex:1"></div>
+            <a href="{{ d.href }}" style="color:#111214;text-decoration:none;font-weight:500;display:flex;gap:6px" style-hover="opacity:.7;color:#111214">View full page<span>→</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;stickerStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Die-cut&quot;,&quot;Backing&quot;],&quot;default&quot;:&quot;Die-cut&quot;,&quot;tsType&quot;:&quot;'Die-cut'|'Backing'&quot;,&quot;section&quot;:&quot;Stickers&quot;},&quot;previewRows&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;min&quot;:1,&quot;max&quot;:4,&quot;step&quot;:1,&quot;default&quot;:2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Stickers&quot;},&quot;dialogView&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;Sticker&quot;,&quot;On lid&quot;],&quot;default&quot;:&quot;Sticker&quot;,&quot;tsType&quot;:&quot;'Sticker'|'On lid'&quot;,&quot;section&quot;:&quot;Dialog&quot;},&quot;startEmpty&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;State&quot;}}">
+class Component extends DCLogic {
+  RAW = [
+    ['openai','OpenAI','openai.svg','AI',1840],['claude','Claude','claude-ai-icon.svg','AI',1720],['cursor','Cursor','cursor_light.svg','AI',2210],['v0','v0','v0_light.svg','AI',960],
+    ['anthropic','Anthropic','anthropic_black.svg','AI',1310],['gemini','Gemini','gemini.svg','AI',1190],['copilot','GitHub Copilot','copilot.svg','AI',1470],['mistral','Mistral AI','mistral-ai_logo.svg','AI',520],['deepseek','DeepSeek','deepseek.svg','AI',640],['grok','Grok','grok-light.svg','AI',410],['groq','Groq','groq.svg','AI',380],['hf','Hugging Face','hugging_face.svg','AI',1050],['langchain','LangChain','langchain-logo.svg','AI',470],['lovable','Lovable','lovable.svg','AI',590],['bolt','Bolt','bolt-new.svg','AI',450],['meta','Meta','meta.svg','AI',330],['midjourney','Midjourney','midjourney.svg','AI',560],['nvidia','NVIDIA','nvidia-icon-light.svg','AI',720],['cohere','Cohere','cohere.svg','AI',260],
+    ['react','React','react_light.svg','Framework',3480],['next','Next.js','nextjs_icon_dark.svg','Framework',3120],['tailwind','Tailwind CSS','tailwindcss.svg','Framework',2760],['svelte','Svelte','svelte.svg','Framework',1290],['astro','Astro','astro-icon-light.svg','Framework',870],
+    ['node','Node.js','nodejs.svg','Runtime',1980],['bun','Bun','bun.svg','Runtime',1410],['deno','Deno','deno.svg','Runtime',690],
+    ['supabase','Supabase','supabase.svg','Database',1690],['pg','PostgreSQL','postgresql.svg','Database',1530],['prisma','Prisma','prisma.svg','Database',840],['drizzle','Drizzle ORM','drizzle-orm_light.svg','Database',720],['neon','Neon','neon.svg','Database',610],
+    ['figma','Figma','figma.svg','Design',2240],['shadcn','shadcn/ui','shadcn-ui.svg','Design',1580],
+    ['github','GitHub','github_light.svg','Devtool',2890],['ts','TypeScript','typescript.svg','Devtool',2980],['vite','Vite','vite.svg','Devtool',1650],['linear','Linear','linear.svg','Devtool',1360],['raycast','Raycast','raycast.svg','Devtool',1120],
+    ['vercel','Vercel','vercel.svg','Infra',3010],['docker','Docker','docker.svg','Infra',1240],
+    ['stripe','Stripe','stripe.svg','Payments & email',1180],['resend','Resend','resend-icon-black.svg','Payments & email',540]
+  ];
+  LOGOS = this.RAW.map(([id, name, file, cat, lids]) => ({id, name, src: 'static/library/' + file, cat, lids}));
+  BY = Object.fromEntries(this.LOGOS.map(l => [l.id, l]));
+  CATS = ['AI','Framework','Runtime','Database','Design','Devtool','Infra','Payments & email'];
+  LINK = {AI: 'AI tools laptop stickers', Framework: 'Frontend stack stickers', Runtime: 'Runtime stickers', Database: 'Database stickers', Design: 'Design tool stickers', Devtool: 'Devtool stickers', Infra: 'Infra stickers', 'Payments & email': 'Payments stickers'};
+  COL = {silver:['#d3d4d7',false,'Silver'], gray:['#2f2f33',true,'Space Gray'], midnight:['#1e2231',true,'Midnight'], starlight:['#e3ddcf',false,'Starlight']};
+  SIZES = [[2,'2″'],[3,'3″'],[4,'4″']];
+  LID_IN = 11.97;
+  DEF_PICKS = ['vercel','next','tailwind','supabase'];
+  state = {q: '', cat: 'All', sort: 'Category', picked: this.DEF_PICKS, hov: null, open: null, dIn: false, shape: null, size: 3, color: 'silver', view: null, copied: false, expanded: {}};
+  searchRef = React.createRef();
+  componentDidMount() {
+    this.key = e => {
+      const inInput = e.target.tagName === 'INPUT';
+      if (this.state.open) {
+        if (e.key === 'Escape') this.close();
+        else if (e.key === 'ArrowRight') this.step(1);
+        else if (e.key === 'ArrowLeft') this.step(-1);
+        return;
+      }
+      if (((e.metaKey || e.ctrlKey) && e.key === 'k') || (e.key === '/' && !inInput)) { e.preventDefault(); this.searchRef.current && this.searchRef.current.focus(); }
+      if (e.key === 'Escape' && inInput) { this.setState({q: ''}); e.target.blur(); }
+    };
+    window.addEventListener('keydown', this.key);
+    if (this.props.startEmpty) this.setState({picked: []});
+    const h = (location.hash || '').slice(1);
+    if (this.BY[h]) this.openLogo(h);
+  }
+  componentDidUpdate(pp, ps) {
+    if (pp.startEmpty !== this.props.startEmpty) this.setState({picked: this.props.startEmpty ? [] : this.DEF_PICKS});
+    if (!!ps.open !== !!this.state.open) document.body.style.overflow = this.state.open ? 'hidden' : '';
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this.key); clearTimeout(this.cT); document.body.style.overflow = ''; }
+  hash(s) { let h = 7; for (const c of s) h = (h * 31 + c.charCodeAt(0)) >>> 0; return h; }
+  k(n) { return n >= 1000 ? (n / 1000).toFixed(1).replace(/\.0$/, '') + 'K' : '' + n; }
+  die() { return (this.props.stickerStyle ?? 'Die-cut') === 'Die-cut'; }
+  dieCut(w, extra = '') { const d = w * .71; return [[w,0],[-w,0],[0,w],[0,-w],[d,d],[-d,d],[d,-d],[-d,-d]].map(([x, y]) => `drop-shadow(${x}px ${y}px 0 #fff)`).join(' ') + ' drop-shadow(0 1px 1px rgba(20,30,40,.18)) drop-shadow(0 3px 6px rgba(20,30,40,.12))' + extra; }
+  toggle(id) { this.setState(st => ({picked: st.picked.includes(id) ? st.picked.filter(x => x !== id) : [...st.picked, id]})); }
+  setHash(id) { try { history.replaceState(null, '', id ? '#' + id : location.pathname + location.search); } catch (e) {} }
+  openLogo(id) {
+    const fresh = !this.state.open;
+    this.setState({open: id, copied: false, ...(fresh ? {dIn: false} : {})});
+    this.setHash(id);
+    if (fresh) requestAnimationFrame(() => requestAnimationFrame(() => this.setState({dIn: true})));
+  }
+  close() { this.setState({open: null, dIn: false}); this.setHash(null); }
+  filtered() {
+    const st = this.state, q = st.q.trim().toLowerCase();
+    let list = this.LOGOS.filter(l => !q || (l.name + ' ' + l.cat).toLowerCase().includes(q));
+    if (st.cat !== 'All') list = list.filter(l => l.cat === st.cat);
+    if (st.sort === 'Category') return this.CATS.flatMap(c => list.filter(l => l.cat === c));
+    return list.slice().sort(st.sort === 'A–Z' ? (a, b) => a.name.localeCompare(b.name) : (a, b) => b.lids - a.lids);
+  }
+  step(dir) {
+    const ids = this.filtered().map(l => l.id), all = ids.includes(this.state.open) ? ids : this.LOGOS.map(l => l.id);
+    const i = all.indexOf(this.state.open); this.openLogo(all[(i + dir + all.length) % all.length]);
+  }
+  shapeOf(id) { return this.state.shape || (this.die() ? 'die' : (this.hash(id) % 3 ? 'circle' : 'square')); }
+  cell(l) {
+    const st = this.state, die = this.die(), on = st.picked.includes(l.id), hov = st.hov === l.id, h = this.hash(l.id), rot = (h % 13) - 6, rad = h % 3 !== 0 ? '50%' : '24%';
+    return {name: l.name, src: l.src, href: 'Stack Stickers Logo.dc.html#' + l.id, tip: on ? 'Peel off your lid' : 'Add to your lid',
+      open: e => { if (e.metaKey || e.ctrlKey) return; e.preventDefault(); this.openLogo(l.id); },
+      quick: e => { e.preventDefault(); e.stopPropagation(); this.toggle(l.id); },
+      enter: () => this.setState({hov: l.id}), leave: () => this.setState(x => x.hov === l.id ? {hov: null} : null),
+      meta: 'ON ' + this.k(l.lids) + ' LIDS', quickLabel: on ? '✓' : '+',
+      quickStyle: {position: 'absolute', top: 8, right: 8, width: 26, height: 26, display: 'grid', placeItems: 'center', borderRadius: 8, fontSize: on ? 12 : 16, fontWeight: 500, lineHeight: 1,
+        color: on ? '#fff' : '#111214', background: on ? '#111214' : '#fff', border: '1px solid ' + (on ? '#111214' : '#e0e0dc'), boxShadow: '0 1px 2px rgba(0,0,0,.06)',
+        opacity: on || hov ? 1 : 0, transform: on || hov ? 'scale(1)' : 'scale(.8)', transition: 'opacity .15s, transform .2s, background .15s'},
+      cell: {position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, padding: '22px 10px 16px', borderRadius: 12, minWidth: 0, textDecoration: 'none', cursor: 'pointer',
+        background: hov ? 'rgba(255,255,255,.75)' : 'transparent', boxShadow: hov ? 'inset 0 0 0 1px #e6e6e3' : 'none', transition: 'background .15s'},
+      sticker: {position: 'absolute', inset: die ? 0 : 8, display: 'grid', placeItems: 'center', background: die ? 'transparent' : '#fff', borderRadius: rad,
+        boxShadow: die ? 'none' : hov ? '0 2px 3px rgba(0,0,0,.12), 0 14px 22px rgba(20,30,40,.18)' : '0 1px 1px rgba(0,0,0,.12), 0 3px 8px rgba(20,30,40,.12)',
+        transform: hov ? `translateY(-4px) rotate(${Math.round(rot * .3)}deg) scale(1.08)` : `rotate(${rot}deg)`, transition: 'transform .45s cubic-bezier(.2,1.5,.4,1), box-shadow .25s'},
+      img: die ? {width: '72%', height: '72%', objectFit: 'contain', filter: this.dieCut(hov ? 3.5 : 3, hov ? ' drop-shadow(0 10px 12px rgba(20,30,40,.16))' : '')} : {width: '56%', height: '56%', objectFit: 'contain'}};
+  }
+  stickerLook(shape, px, cut) {
+    const die = shape === 'die';
+    return {wrap: {width: px, height: px, display: 'grid', placeItems: 'center', transform: 'rotate(-4deg)', transition: 'width .3s cubic-bezier(.3,1.25,.4,1), height .3s cubic-bezier(.3,1.25,.4,1), border-radius .25s',
+        background: die ? 'transparent' : '#fff', borderRadius: shape === 'circle' ? '50%' : '24%', boxShadow: die ? 'none' : '0 1px 2px rgba(0,0,0,.14), 0 10px 24px rgba(20,30,40,.14)'},
+      img: {width: die ? '100%' : '60%', height: die ? '100%' : '60%', objectFit: 'contain', filter: die ? this.dieCut(cut) : 'none'}};
+  }
+  renderVals() {
+    const st = this.state, list = this.filtered();
+    let sections;
+    if (st.sort === 'Category') {
+      const capOn = st.cat === 'All' && !st.q.trim(), cap = Math.max(1, (this.props.previewRows ?? 2)) * 6;
+      sections = this.CATS.map(c => ({c, items: list.filter(l => l.cat === c).sort((a, b) => b.lids - a.lids)})).filter(s => s.items.length)
+        .map(s => {
+          const n = s.items.length, over = capOn && n > cap, open = !!st.expanded[s.c], shown = over && !open ? s.items.slice(0, cap - 1) : s.items, hidden = s.items.slice(cap - 1);
+          return {title: s.c, count: n + ' LOGOS', hasLink: true, link: this.LINK[s.c], items: shown.map(l => this.cell(l)),
+            hasMore: over, toggle: () => this.setState(x => ({expanded: {...x.expanded, [s.c]: !x.expanded[s.c]}})),
+            moreLabel: open ? 'Show fewer' : '+' + hidden.length + ' more', moreMeta: open ? 'COLLAPSE ' + s.c.toUpperCase() : 'SHOW ALL ' + n,
+            peek: (open ? [] : hidden.slice(0, 3)).map((l, i) => ({src: l.src, style: {width: 40, height: 40, display: 'grid', placeItems: 'center', borderRadius: '50%', background: '#fff', marginLeft: i ? -12 : 0, boxShadow: '0 0 0 2px #f6f6f4, 0 2px 6px rgba(20,30,40,.1)', transform: `rotate(${(i - 1) * 8}deg)`, position: 'relative', zIndex: 3 - i}}))};
+        });
+    } else sections = list.length ? [{title: st.sort === 'A–Z' ? 'All logos, A–Z' : 'Most used on lids', count: list.length + ' LOGOS', hasLink: false, link: '', items: list.map(l => this.cell(l)), hasMore: false}] : [];
+    const chipStyle = a => ({height: 32, padding: '0 10px 0 12px', boxSizing: 'border-box', display: 'flex', alignItems: 'center', gap: 7, borderRadius: 999, cursor: 'pointer', fontSize: 13, fontWeight: 500, whiteSpace: 'nowrap', flex: 'none',
+      color: a ? '#fff' : '#3d3f44', background: a ? '#111214' : '#fff', border: '1px solid ' + (a ? '#111214' : '#e0e0dc'), transition: 'background .15s, color .15s'});
+    const chips = ['All', ...this.CATS].map(c => { const a = st.cat === c; return {label: c, n: c === 'All' ? this.LOGOS.length : this.LOGOS.filter(l => l.cat === c).length, pick: () => this.setState({cat: c}), style: chipStyle(a),
+      numStyle: {fontFamily: "'GeistMono',monospace", fontSize: 11, color: a ? '#a3a3a0' : '#8a8b8f'}}; });
+    const seg = (a, grow) => ({height: 28, padding: '0 11px', flex: grow ? 1 : 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 7, cursor: 'pointer', fontSize: 12.5, fontWeight: 500, whiteSpace: 'nowrap',
+      color: a ? '#111214' : '#6b6b67', background: a ? '#fff' : 'transparent', boxShadow: a ? '0 1px 2px rgba(0,0,0,.08)' : 'none', transition: 'background .15s'});
+    const n = st.picked.length;
+    const v = {
+      total: this.LOGOS.length, searchRef: this.searchRef, q: st.q, setQ: e => this.setState({q: e.target.value}), clearQ: () => this.setState({q: ''}),
+      chips, sorts: ['Category', 'A–Z', 'Most used'].map(l => ({label: l, pick: () => this.setState({sort: l}), style: seg(st.sort === l)})),
+      sections, empty: sections.length === 0,
+      tray: {position: 'fixed', left: '50%', bottom: 20, zIndex: 50, display: 'flex', alignItems: 'center', gap: 14, padding: '7px 7px 7px 10px', borderRadius: 14, background: '#111214',
+        boxShadow: '0 1px 0 rgba(255,255,255,.08) inset, 0 12px 32px rgba(20,30,40,.28)', transform: `translate(-50%, ${n ? 0 : 90}px)`, opacity: n ? 1 : 0, pointerEvents: n ? 'auto' : 'none',
+        transition: 'transform .35s cubic-bezier(.2,1.3,.4,1), opacity .2s'},
+      trayIcons: st.picked.slice(-6).map((id, i) => ({src: this.BY[id].src, style: {width: 30, height: 30, display: 'grid', placeItems: 'center', borderRadius: '50%', background: '#fff', marginLeft: i ? -8 : 0, boxShadow: '0 0 0 2px #111214', position: 'relative', zIndex: i}})),
+      trayLabel: `${n} on your lid`, clearAll: () => this.setState({picked: []}),
+      dlg: !!st.open
+    };
+    if (!st.open) return v;
+    const l = this.BY[st.open], shape = this.shapeOf(l.id), on = st.picked.includes(l.id), view = st.view || (this.props.dialogView === 'On lid' ? 'lid' : 'sheet');
+    const ids = list.some(x => x.id === l.id) ? list.map(x => x.id) : this.LOGOS.map(x => x.id), [lc, dark, cname] = this.COL[st.color];
+    const rel = [...this.LOGOS.filter(x => x.cat === l.cat && x.id !== l.id), ...this.LOGOS.filter(x => x.cat !== l.cat).sort((a, b) => b.lids - a.lids)].slice(0, 6);
+    const big = this.stickerLook(shape, 72 + st.size * 48, 7), small = this.stickerLook(shape, (st.size / this.LID_IN * 100) + '%', 2);
+    return {...v,
+      stop: e => e.stopPropagation(), close: () => this.close(), prev: () => this.step(-1), next: () => this.step(1),
+      overlay: {position: 'fixed', inset: 0, zIndex: 100, display: 'grid', placeItems: 'center', padding: 24, background: 'rgba(17,18,20,.42)', backdropFilter: 'blur(3px)', opacity: st.dIn ? 1 : 0, transition: 'opacity .2s'},
+      dialog: {width: 900, maxWidth: '100%', maxHeight: 'calc(100vh - 48px)', display: 'grid', gridTemplateColumns: 'minmax(0,1.1fr) minmax(0,1fr)', borderRadius: 18, overflow: 'hidden', background: '#fff',
+        boxShadow: '0 0 0 1px rgba(17,18,20,.08), 0 24px 64px rgba(20,30,40,.28)', transform: st.dIn ? 'none' : 'translateY(12px) scale(.98)', transition: 'transform .3s cubic-bezier(.2,1.2,.4,1)'},
+      d: {name: l.name, src: l.src, eyebrow: l.cat.toUpperCase() + ' · ON ' + this.k(l.lids) + ' LIDS', meta: 'SVG FROM SVGL', href: 'Stack Stickers Logo.dc.html#' + l.id},
+      dPos: (ids.indexOf(l.id) + 1) + ' / ' + ids.length,
+      dViews: [['sheet', 'Sticker'], ['lid', 'On a lid']].map(([k, lb]) => ({label: lb, pick: () => this.setState({view: k}), style: seg(view === k)})),
+      onSheet: view === 'sheet', onLid: view === 'lid',
+      dBig: big,
+      dLid: {...small, label: `${st.size}″ ON A 13″ AIR · ${cname.toUpperCase()}`,
+        lid: {position: 'relative', width: '100%', aspectRatio: '304 / 215', borderRadius: '3.6% / 5.1%', overflow: 'hidden', display: 'grid', placeItems: 'center', transition: 'background .3s',
+          background: `radial-gradient(ellipse at 26% 6%, rgba(255,255,255,${dark ? .09 : .35}), transparent 55%), linear-gradient(165deg, rgba(255,255,255,.05), rgba(0,0,0,${dark ? .25 : .1})), ${lc}`,
+          boxShadow: `inset 0 1px 0 rgba(255,255,255,${dark ? .16 : .6}), 0 2px 6px rgba(0,0,0,.18), 0 18px 36px rgba(20,30,40,.14)`}},
+      swatches: Object.keys(this.COL).map(c => ({title: this.COL[c][2], pick: () => this.setState({color: c}),
+        style: {width: 18, height: 18, borderRadius: '50%', cursor: 'pointer', background: this.COL[c][0], boxShadow: st.color === c ? '0 0 0 2px #f1f1ee, 0 0 0 3.5px #111214' : 'inset 0 0 0 1px rgba(0,0,0,.12)', transition: 'box-shadow .15s'}})),
+      dShapes: [['die', 'Die-cut'], ['circle', 'Circle'], ['square', 'Square']].map(([k, lb]) => ({label: lb, pick: () => this.setState({shape: k}), style: seg(shape === k, true)})),
+      dSizes: this.SIZES.map(([s, lb]) => ({label: lb, pick: () => this.setState({size: s}), style: seg(st.size === s, true)})),
+      dAdd: () => this.toggle(l.id), dAddLabel: on ? '✓ On your lid · Remove' : 'Add to your lid',
+      dAddStyle: {height: 44, display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: 10, cursor: 'pointer', fontWeight: 500, fontSize: 14.5, transition: 'background .15s, color .15s',
+        background: on ? '#fff' : '#111214', color: on ? '#111214' : '#fff', border: '1px solid ' + (on ? 'rgba(17,18,20,.16)' : '#111214'), boxShadow: on ? 'none' : 'inset 0 1px 0 rgba(255,255,255,.14)'},
+      dDownload: () => { const a = document.createElement('a'); a.href = l.src; a.download = l.id + '.svg'; document.body.appendChild(a); a.click(); a.remove(); },
+      dCopy: async () => { try { const t = await (await fetch(l.src)).text(); await navigator.clipboard.writeText(t); } catch (e) {} this.setState({copied: true}); clearTimeout(this.cT); this.cT = setTimeout(() => this.setState({copied: false}), 1400); },
+      dCopyLabel: st.copied ? 'Copied ✓' : 'Copy SVG',
+      related: rel.map(x => ({name: x.name, src: x.src, open: () => this.openLogo(x.id)}))
+    };
+  }
+}
+</script>
+</body>
+</html>
