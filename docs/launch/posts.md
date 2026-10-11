@@ -43,7 +43,7 @@ Media: screenshot of /editor with a MacBook selected and a sticker selected (the
 **3/**
 
 ```
-Search the whole svgl logo library, hit Enter, it lands on your lid. Light and dark variants, drag, rotate, layer them like real vinyl.
+Search 665 developer logos, hit Enter, it lands on your lid. Light and dark variants, drag, rotate, layer them like real vinyl.
 
 Stuck? Press S and it shuffles. Lock the ones you like.
 ```
@@ -79,7 +79,7 @@ Media: screenshot of /community with a few designs, or one /designs/<id> page.
 **7/**
 
 ```
-It's open source (MIT), built on svgl by @pheralb. All the logos come from his library, go star it.
+It's open source (MIT). The logo library started from svgl by @pheralb, go star it too.
 
 Repo: https://github.com/PaoloJN/stickerz
 
@@ -111,9 +111,9 @@ The die-cut outline is computed from each logo's alpha channel, so the cut line 
 
 No account. Designs are saved per browser. If you hit share, you get a link and the design shows up on the Community page.
 
-Built with SvelteKit (Svelte 5), Tailwind, Neon Postgres, hosted on Vercel. The logos come from svgl by pheralb, which this is built on. It's MIT: https://github.com/PaoloJN/stickerz
+Built with SvelteKit (Svelte 5), Tailwind, Neon Postgres, hosted on Vercel. The logo library started from svgl by pheralb. It's MIT: https://github.com/PaoloJN/stickerz
 
-What's rough: the logo library is only as complete as svgl, some logos have odd cut outlines, and I've only tested printing on a few setups. The laptop list is MacBooks for now.
+What's rough: the library is 665 logos and yours might be missing (there's a request button), some logos have odd cut outlines, and I've only tested printing on a few setups. The laptop list is MacBooks for now.
 
 Feedback I'd like: does the print export work on your printer or cutter, which logos have bad outlines, and which laptops or other devices you'd want added.
 ```
@@ -137,7 +137,7 @@ You pick a MacBook, and the canvas becomes its lid in real millimeters. Then you
 
 When you're happy you can export a PNG, SVG, or a PDF at true size with cut lines for a print shop. You can also share a link, which puts the design on a Community page where others can remix it. No account needed, designs are saved in your browser.
 
-It's built with SvelteKit, Tailwind, Neon and Vercel, and the logos come from svgl (pheralb's open logo library). Open source, MIT: https://github.com/PaoloJN/stickerz
+It's built with SvelteKit, Tailwind, Neon and Vercel, and the logo library started from svgl, pheralb's open logo collection. Open source, MIT: https://github.com/PaoloJN/stickerz
 
 It's a beta. I'd love to hear what breaks, which logos look off, and whether the print export works for you. And post your stack if you make one.
 ```
@@ -155,7 +155,7 @@ It lets you lay out the logos of your tech stack as die-cut stickers on a laptop
 
 No account, nothing to install. Designs are saved in your browser, and if you share one it shows up on a public Community page.
 
-It's open source and built on svgl, the open logo library by pheralb, which is where all the logos come from.
+It's open source. The logo library started from svgl, pheralb's open logo collection.
 
 If you try it, I'd like to see your stack.
 
