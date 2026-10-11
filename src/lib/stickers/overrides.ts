@@ -52,10 +52,6 @@ export type StickerOverride = {
 export const HAND_OVERRIDES: Record<string, StickerOverride> = {
   // paste "Copy as override" lines here, e.g.
   // nvidia: { note: "wordmark reads better as one soft piece", place: { contour: "smooth", smooth: 70 } },
-  nextjs_icon: {
-    note: "the library icon draws the N with white→transparent gradients under an alpha mask, with React-style ':r8:' ids; the editor's inliner and resvg both lose the N, so the icon is a flat black disc with a solid white N",
-    art: { icon: "/stickers/fixed/nextjs_icon_dark.svg" },
-  },
 };
 
 /**

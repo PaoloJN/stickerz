@@ -2,6 +2,7 @@ import { cutPath, type Alpha } from "./cut";
 import { CANON, type CutEntry } from "./cuts-types";
 import { DEFAULT_STYLE, smoothMm } from "./style";
 import type { BuildSettings, CutShape } from "./overrides";
+import { normalizeSvg } from "./svg-normalize";
 
 /**
  * Generating one precomputed cut line from an SVG file's source: shared by scripts/build-cuts.ts and the dev sticker
@@ -50,6 +51,7 @@ const blank = (a: Alpha) => a.w < 1 || a.h < 1 || !a.data.some((v) => v > 0);
 /** The cut line for one SVG source, or null when it draws nothing or can't be read. */
 export function buildCut(svg: string, settings: BuildSettings, rasterize: Rasterize): CutEntry | null {
   const b = resolveBuild(settings);
+  svg = normalizeSvg(svg);
   let a: Alpha;
   try {
     a = rasterize(b.stripMasks ? unmask(svg) : svg);

@@ -10,6 +10,7 @@
   import { cn } from "@/utils/cn";
   import type { ReviewEntry, ReviewItem, ReviewStatus } from "$lib/server/sticker-review";
   import type { BuildSettings } from "$lib/stickers/overrides";
+  import { loadInline, peekInline, renderArt, type InlineArt } from "$lib/stickers/inline";
 
   let { data }: PageProps = $props();
 
@@ -126,10 +127,15 @@
   let previewUrl = $state("");
   let previewTimer: ReturnType<typeof setTimeout> | undefined;
 
+  // the editor doesn't draw the file as an <img>: it inlines it (recolouring, tight borders), which is where
+  // browser-only CSS gets lost. Show that rendering next to the others so a mismatch is caught here, not on the homepage.
+  let inlineArt = $state<InlineArt | null | "loading">("loading");
   function openPanel(it: ReviewItem) {
     panel = it;
     draft = { ...it.build };
     scope = "file";
+    inlineArt = peekInline(it.href) ?? "loading";
+    if (inlineArt === "loading") loadInline(it.href).then((a) => panel?.file === it.file && (inlineArt = a));
   }
   $effect(() => {
     if (!panel) return;
@@ -310,7 +316,7 @@
         </div>
         <button type="button" class="cursor-pointer text-muted-foreground" onclick={() => (panel = null)}>✕</button>
       </div>
-      <div class="grid gap-5 p-5 md:grid-cols-2">
+      <div class="grid gap-5 p-5 md:grid-cols-3">
         <div class="flex flex-col gap-2">
           <span class="text-[12px] text-muted-foreground">Now</span>
           <div class="grid aspect-square place-items-center rounded-xl" style:background-color={darkLid ? "#2e2c2e" : "#e3e4e5"}>
@@ -321,6 +327,18 @@
           <span class="text-[12px] text-muted-foreground">With these settings</span>
           <div class="grid aspect-square place-items-center rounded-xl" style:background-color={darkLid ? "#2e2c2e" : "#e3e4e5"}>
             {#if previewUrl}<img src={previewUrl} alt="" class="size-[80%] object-contain" />{/if}
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <span class="text-[12px] text-muted-foreground" title="The logo as the editor inlines it (recolourable, tight borders). If this differs from the file, the editor and the homepage will show it wrong.">In the editor</span>
+          <div class="grid aspect-square place-items-center rounded-xl" style:background-color={darkLid ? "#2e2c2e" : "#e3e4e5"}>
+            {#if inlineArt === "loading"}
+              <span class="text-xs text-muted-foreground">Loading…</span>
+            {:else if inlineArt}
+              <svg viewBox={inlineArt.viewBox.join(" ")} class="size-[60%]" aria-hidden="true">{@html renderArt(inlineArt, "rv", (c) => c)}</svg>
+            {:else}
+              <span class="px-4 text-center text-xs text-destructive">The editor can’t inline this file</span>
+            {/if}
           </div>
         </div>
       </div>

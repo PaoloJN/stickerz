@@ -13,6 +13,7 @@ import { CANON, type CutEntry } from "$lib/stickers/cuts-types";
 import { resolveFill } from "$lib/stickers/style";
 import type { Layout } from "$lib/stickers/types";
 import { siteConfig } from "@/config/site";
+import { normalizeSvg } from "$lib/stickers/svg-normalize";
 
 // opentype.js is CommonJS; its exports land on the module default under rollup/SSR but on the namespace under vite-node
 const opentype = (opentypeNs as unknown as { default?: typeof opentypeNs }).default ?? opentypeNs;
@@ -173,7 +174,8 @@ export function loadArt(href: string, fetchFn: typeof fetch): Promise<string | n
       .then(async (res) => {
         if (!res.ok) return null;
         const type = (res.headers.get("content-type") ?? "image/svg+xml").split(";")[0];
-        return `data:${type};base64,${Buffer.from(await res.arrayBuffer()).toString("base64")}`;
+        const bytes = type === "image/svg+xml" ? Buffer.from(normalizeSvg(await res.text())) : Buffer.from(await res.arrayBuffer());
+        return `data:${type};base64,${bytes.toString("base64")}`;
       })
       .catch(() => null);
     artCache.set(href, p);

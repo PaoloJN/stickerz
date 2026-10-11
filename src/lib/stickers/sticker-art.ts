@@ -1,4 +1,5 @@
 import { CANON, type CutEntry } from "./cuts-types";
+import { normalizeSvg } from "./svg-normalize";
 
 /**
  * A finished sticker as one standalone SVG: the precomputed die-cut vinyl (white, with a baked soft shadow) behind the
@@ -30,6 +31,7 @@ const num = (s: string | undefined) => (s ? parseFloat(s) : NaN);
 export const VINYL = { light: "#fff", dark: "#121212" } as const;
 
 export function stickerSvg(logoSvg: string, cut: CutEntry | null, aspectHint = 1, vinylColor: string = VINYL.light): string | null {
+  logoSvg = normalizeSvg(logoSvg);
   const open = logoSvg.match(/<svg\b[^>]*>/i);
   if (!open) return null;
   const tag = open[0];

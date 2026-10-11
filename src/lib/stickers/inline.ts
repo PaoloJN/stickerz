@@ -20,12 +20,14 @@ export type InlineArt = {
   palette: string[];
 };
 
+import { normalizeSvg } from "./svg-normalize";
+
 const SVG_NS = "http://www.w3.org/2000/svg";
 const MAX_COLORS = 24;
 const PAINTED = new Set(["path", "rect", "circle", "ellipse", "line", "polyline", "polygon", "text"]);
 const DROP = new Set(["script", "foreignObject", "iframe", "style", "metadata", "title", "desc"]);
 /** presentation properties baked from computed style */
-const BAKE = ["fill-rule", "clip-rule", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-dasharray", "stroke-dashoffset"];
+const BAKE = ["fill-rule", "clip-rule", "stroke-linecap", "stroke-linejoin", "stroke-miterlimit", "stroke-dasharray", "stroke-dashoffset", "paint-order", "vector-effect"];
 const TEXT_BAKE = ["font-family", "font-size", "font-weight", "font-style", "letter-spacing", "text-anchor", "dominant-baseline"];
 
 const cache = new Map<string, InlineArt | null>();
@@ -63,7 +65,7 @@ const scaleOf = (m: DOMMatrix | null) => (m ? Math.sqrt(Math.abs(m.a * m.d - m.b
 
 function parse(text: string): InlineArt | null {
   if (typeof document === "undefined") return null;
-  const doc = new DOMParser().parseFromString(text, "image/svg+xml");
+  const doc = new DOMParser().parseFromString(normalizeSvg(text), "image/svg+xml");
   const src = doc.documentElement;
   if (src.nodeName !== "svg" || doc.querySelector("parsererror")) return null;
 
@@ -133,11 +135,17 @@ function parse(text: string): InlineArt | null {
     type Shape = { el: Element; fill: boolean; stroke: boolean; sw: number; inv: number };
     const shapes: Shape[] = [];
     const all = [...root.querySelectorAll("*")];
+    // CSS-only properties with no attribute form survive as a minimal style attribute
+    const keepStyle = new Map<Element, string>();
     for (const el of all) {
       const cs = getComputedStyle(el);
       const geometryOnly = !!el.parentElement?.closest("clipPath, mask");
       if (cs.opacity !== "1") el.setAttribute("opacity", cs.opacity);
       if (cs.display === "none") el.setAttribute("display", "none");
+      // the style attribute goes away below, so what it carried must land in attributes first
+      if (el.localName === "mask") el.setAttribute("mask-type", cs.maskType || "luminance");
+      if (cs.mixBlendMode && cs.mixBlendMode !== "normal") keepStyle.set(el, `mix-blend-mode:${cs.mixBlendMode}`);
+      if (/transform/.test(el.getAttribute("style") ?? "") && cs.transform && cs.transform !== "none") el.setAttribute("transform", cs.transform);
       if (el.localName === "stop") {
         el.setAttribute("stop-color", paint(cs.stopColor));
         el.setAttribute("stop-opacity", cs.stopOpacity);
@@ -161,6 +169,8 @@ function parse(text: string): InlineArt | null {
     for (const el of all) {
       el.removeAttribute("class");
       el.removeAttribute("style");
+      const keep = keepStyle.get(el);
+      if (keep) el.setAttribute("style", keep);
     }
     root.querySelectorAll("style").forEach((s) => s.remove());
 
