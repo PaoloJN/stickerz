@@ -16,7 +16,8 @@ export function renamedPath(path: string): string | null {
   if (path === "/stacks" || path === "/stacks/") return "/designs";
   if ((r = m(/^\/stack\/([^/]+)\/?$/))) return `/designs/${r[1]}`;
   if ((r = m(/^\/directory\/([^/]+)\/?$/))) return `/stickers?category=${r[1]}`;
-  if (path === "/favorites" || path === "/favorites/") return "/archived/favorites";
+  if (path === "/favorites" || path === "/favorites/") return "/stickers";
+  if (path === "/directory" || path === "/directory/") return "/stickers";
   return null;
 }
 
