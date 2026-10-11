@@ -2,6 +2,7 @@
   /** Release note + live "Star on GitHub" count. The count chip hides when the count is unknown. */
   import { REPO_URL } from "$lib/support";
   import { formatCount } from "$lib/format";
+  import { siteConfig } from "@/config/site";
 
   let { stars = null }: { stars?: number | null } = $props();
 
@@ -16,12 +17,12 @@
     <a
       href="{REPO_URL}/releases"
       class="{chip} px-1.5 py-0.5 text-[11px] font-medium hover:opacity-70"
-      >v3.0</a
+      >{siteConfig.version}</a
     >
     <a
-      href="{REPO_URL}/releases"
+      href="/docs/works"
       class="hidden items-center gap-1.5 text-foreground hover:opacity-70 md:flex"
-      >Light mode and print sheets are here<span
+      >Just launched. Here’s how it works<span
         class="text-xs"
         aria-hidden="true">→</span
       ></a
