@@ -1,1 +1,102 @@
-{}
+{
+  "github": {
+    "files": {
+      "github_light.svg": {
+        "shape": "circle",
+        "margin": 3.5,
+        "smooth": 50,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      },
+      "github_dark.svg": {
+        "shape": "circle",
+        "margin": 3.5,
+        "smooth": 50,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      }
+    }
+  },
+  "planetscale": {
+    "files": {
+      "planetscale.svg": {
+        "shape": "circle",
+        "margin": 3,
+        "smooth": 50,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      },
+      "planetscale_dark.svg": {
+        "shape": "circle",
+        "margin": 3,
+        "smooth": 50,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      }
+    }
+  },
+  "linear": {
+    "files": {
+      "linear.svg": {
+        "shape": "circle",
+        "margin": 3,
+        "smooth": 50,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      }
+    }
+  },
+  "x": {
+    "files": {
+      "x.svg": {
+        "margin": 5,
+        "smooth": 50,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      },
+      "x_dark.svg": {
+        "margin": 5,
+        "smooth": 50,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      }
+    }
+  },
+  "adobe": {
+    "files": {
+      "adobe.svg": {
+        "shape": "square",
+        "margin": 6.5,
+        "smooth": 100,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      }
+    }
+  },
+  "vercel": {
+    "files": {
+      "vercel.svg": {
+        "margin": 4,
+        "smooth": 0,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      },
+      "vercel_dark.svg": {
+        "margin": 4,
+        "smooth": 0,
+        "fillHoles": true,
+        "merge": true,
+        "stripMasks": false
+      }
+    }
+  }
+}

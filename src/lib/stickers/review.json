@@ -1,7 +1,8 @@
 {
   "adobe.svg": {
-    "status": "fix",
-    "at": "2026-10-09T05:42:50.149Z"
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:57:47.493Z"
   },
   "angular.svg": {
     "status": "fix",
@@ -48,12 +49,14 @@
     "at": "2026-10-09T05:39:43.304Z"
   },
   "github_dark.svg": {
-    "status": "fix",
-    "at": "2026-10-09T05:44:41.795Z"
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:55:04.078Z"
   },
   "github_light.svg": {
-    "status": "fix",
-    "at": "2026-10-09T05:44:44.835Z"
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:54:44.381Z"
   },
   "hcaptcha.svg": {
     "status": "fix",
@@ -80,8 +83,9 @@
     "at": "2026-10-09T05:37:20.461Z"
   },
   "linear.svg": {
-    "status": "fix",
-    "at": "2026-10-09T05:42:15.659Z"
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:57:00.691Z"
   },
   "lovable.svg": {
     "status": "fix",
@@ -118,6 +122,10 @@
   "netflix-icon.svg": {
     "status": "fix",
     "at": "2026-10-09T05:39:41.267Z"
+  },
+  "nextjs_icon_dark.svg": {
+    "status": "ok",
+    "at": "2026-10-11T05:28:05.239Z"
   },
   "ollama_dark.svg": {
     "status": "fix",
@@ -156,12 +164,14 @@
     "at": "2026-10-09T05:40:02.573Z"
   },
   "planetscale_dark.svg": {
-    "status": "fix",
-    "at": "2026-10-09T05:40:45.291Z"
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:56:45.392Z"
   },
   "planetscale.svg": {
-    "status": "fix",
-    "at": "2026-10-09T05:40:41.029Z"
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:56:36.488Z"
   },
   "sublimetext.svg": {
     "status": "fix",
@@ -179,12 +189,24 @@
     "status": "fix",
     "at": "2026-10-09T05:38:41.640Z"
   },
+  "vercel_dark.svg": {
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:58:36.723Z"
+  },
+  "vercel.svg": {
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:58:25.589Z"
+  },
   "x_dark.svg": {
-    "status": "fix",
-    "at": "2026-10-09T05:42:54.203Z"
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:57:25.919Z"
   },
   "x.svg": {
-    "status": "fix",
-    "at": "2026-10-09T05:42:52.010Z"
+    "status": "ok",
+    "note": "fixed",
+    "at": "2026-10-11T05:57:27.728Z"
   }
 }
