@@ -88,14 +88,47 @@ function parseRemix(label: string): number {
   return Math.round(parseFloat(m[1]) * (m[2] ? 1000 : 1));
 }
 
-/** Public stacks for the gallery, ordered by the chosen sort. */
-export async function listGallery(sort: GallerySort = "trending", limit = 60): Promise<GalleryStack[]> {
+/**
+ * Every public design, read once and kept in memory. The public pages (home, sticker pages, the sitemap) are what
+ * search crawlers walk all day; if each of those requests queried Postgres, the serverless database would never get
+ * its idle minutes to sleep, and its monthly compute allowance burns on bots. So they all read this snapshot, which
+ * refreshes at most every PUBLIC_TTL and is dropped as soon as this instance writes a design.
+ * Other instances may show a share up to PUBLIC_TTL late; /community reads live instead (see `listGallery`).
+ */
+const PUBLIC_TTL = 30 * 60_000;
+const PUBLIC_LIMIT = 2000;
+let publicCache: { at: number; rows: Promise<StackRow[]> } | null = null;
+
+async function publicRows(): Promise<StackRow[]> {
+  if (!db) return [];
+  if (publicCache && Date.now() - publicCache.at < PUBLIC_TTL) return publicCache.rows;
+  const rows = db.select().from(stacks).where(eq(stacks.visibility, "public")).orderBy(desc(stacks.createdAt)).limit(PUBLIC_LIMIT);
+  const entry = { at: Date.now(), rows };
+  publicCache = entry;
+  // a failed read must not stick for half an hour
+  rows.catch(() => {
+    if (publicCache === entry) publicCache = null;
+  });
+  return rows;
+}
+
+/** Forget the snapshot after a write, so the writer sees their change on the next public page. */
+function invalidatePublic(): void {
+  publicCache = null;
+}
+
+/**
+ * Public stacks for the gallery, ordered by the chosen sort. `live` queries Postgres (the /community page, which
+ * people check right after sharing); otherwise it reads the snapshot.
+ */
+export async function listGallery(sort: GallerySort = "trending", limit = 60, opts: { live?: boolean } = {}): Promise<GalleryStack[]> {
   if (!db) {
     // mock seeds are listed newest-first; give them synthetic dates so the sorts behave like the SQL
     const now = Date.now();
     const ranked = STACKS.filter((m) => m.vis === "Public").map((m, i) => ({ m, createdAt: new Date(now - i * 86_400_000), remixCount: parseRemix(m.remix) }));
     return sortGallery(ranked, sort, now).map((r) => fromMock(r.m));
   }
+  if (!opts.live) return sortGallery(await publicRows(), sort).slice(0, limit).map(rowToStack);
   const newest = desc(stacks.createdAt);
   const order =
     sort === "newest"
@@ -117,47 +150,34 @@ export async function listGallery(sort: GallerySort = "trending", limit = 60): P
 
 /** Every public design's id and last edit, for the sitemap. `[]` without a database. */
 export async function listPublicIds(limit = 5000): Promise<{ id: string; updatedAt: Date }[]> {
-  if (!db) return [];
-  return db
-    .select({ id: stacks.id, updatedAt: stacks.updatedAt })
-    .from(stacks)
-    .where(eq(stacks.visibility, "public"))
-    .orderBy(desc(stacks.updatedAt))
-    .limit(limit);
+  const rows = await publicRows();
+  return [...rows]
+    .sort((a, b) => b.updatedAt.getTime() - a.updatedAt.getTime())
+    .slice(0, limit)
+    .map((r) => ({ id: r.id, updatedAt: r.updatedAt }));
 }
-
-/** usage counts are one grouped query; keep them for a minute so every sticker page doesn't rerun it */
-const USAGE_TTL = 60_000;
-let usageCache: { at: number; counts: Record<string, number> } | null = null;
 
 /**
  * How many public designs use each logo key (a design counts once however many copies it holds). Real data only:
  * `{}` without a database, so pages show no numbers rather than mock ones.
  */
 export async function logoUsage(): Promise<Record<string, number>> {
-  if (!db) return {};
-  if (usageCache && Date.now() - usageCache.at < USAGE_TTL) return usageCache.counts;
-  const res = await db.execute<{ logo: string; n: number }>(sql`
-    select s->>'logo' as logo, count(distinct ${stacks.id})::int as n
-    from ${stacks}, jsonb_array_elements(${stacks.layout}->'stickers') as s
-    where ${stacks.visibility} = 'public'
-    group by 1`);
   const counts: Record<string, number> = {};
-  for (const r of res.rows) if (typeof r.logo === "string") counts[r.logo] = Number(r.n) || 0;
-  usageCache = { at: Date.now(), counts };
+  for (const r of await publicRows()) {
+    for (const logo of new Set(r.layout.stickers.map((s) => s.logo))) {
+      if (typeof logo === "string") counts[logo] = (counts[logo] ?? 0) + 1;
+    }
+  }
   return counts;
 }
 
 /** Public designs that use `key`, most remixed first. `[]` without a database (callers pick their own fallback). */
 export async function designsWithLogo(key: string, limit = 60): Promise<GalleryStack[]> {
-  if (!db) return [];
-  const rows = await db
-    .select()
-    .from(stacks)
-    .where(and(eq(stacks.visibility, "public"), sql`${stacks.layout}->'stickers' @> ${JSON.stringify([{ logo: key }])}::jsonb`))
-    .orderBy(desc(stacks.remixCount))
-    .limit(limit);
-  return rows.map(rowToStack);
+  return (await publicRows())
+    .filter((r) => r.layout.stickers.some((s) => s.logo === key))
+    .sort((a, b) => b.remixCount - a.remixCount)
+    .slice(0, limit)
+    .map(rowToStack);
 }
 
 /**
@@ -188,8 +208,8 @@ export async function incrementRemix(id: string): Promise<void> {
   if (!db) return;
   const [row] = await db.select({ n: stacks.remixCount }).from(stacks).where(eq(stacks.id, id)).limit(1);
   if (row) await db.update(stacks).set({ remixCount: row.n + 1 }).where(eq(stacks.id, id));
+  invalidatePublic();
 }
-
 
 /** All stacks owned by this anonymous owner, newest first. */
 export async function listMine(ownerId: string): Promise<GalleryStack[]> {
@@ -231,6 +251,7 @@ export async function updateStack(id: string, ownerId: string, patch: { name?: s
     set.layout = layout; set.model = layout.laptop.model; set.color = layout.laptop.color; set.stickerCount = layout.stickers.length;
   }
   await db.update(stacks).set(set).where(and(eq(stacks.id, id), eq(stacks.ownerId, ownerId)));
+  invalidatePublic();
   return true;
 }
 
@@ -240,6 +261,7 @@ export async function deleteStack(id: string, ownerId: string): Promise<boolean>
   if (!row) return false;
   assertOwner(row, ownerId);
   await db.delete(stacks).where(and(eq(stacks.id, id), eq(stacks.ownerId, ownerId)));
+  invalidatePublic();
   return true;
 }
 
@@ -249,5 +271,6 @@ export async function setVisibility(id: string, ownerId: string, vis: "private" 
   if (!row) return false;
   assertOwner(row, ownerId);
   await db.update(stacks).set({ visibility: vis, updatedAt: new Date() }).where(and(eq(stacks.id, id), eq(stacks.ownerId, ownerId)));
+  invalidatePublic();
   return true;
 }
